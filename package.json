@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Migobucks buddy apis",
   "main": "dist/server.js",
-  "scripts": { 
+  "scripts": {
     "build": "tsc",
     "dev": "ts-node ./src/server.ts",
     "start": "nodemon ./dist/server.js"
