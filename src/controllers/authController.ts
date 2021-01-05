@@ -116,8 +116,7 @@ export class AuthController {
    * @param  {function} next
    */
   public async getdetails(req: Request, res: Response, next: NextFunction) {
-    try {
-      debugger;
+    try { 
       const result = await this.authService.getUsers(0); 
       console.log(result);
       if (result) {
