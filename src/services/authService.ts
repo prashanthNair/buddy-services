@@ -18,12 +18,11 @@ class AuthService implements IAuthService {
     return AuthService.instance;
   }
 
- /* Test method*/
-   /* TODO remove hardcoded value and switch to sp*/
-   public async getUsers(userId: string, password: string): Promise<User> {
+  /* Test method*/
+  public async getUsers(userId: string, password: string): Promise<User> {
     try { 
-      let sql = `SELECT userId FROM user where userId=`+userId;
-      const [rows, fields] = await db.query(sql); 
+      let sql = `CALL GetUsers(?)`;
+      const [rows, fields] = await db.query(sql,userId); 
       console.log("service", rows);
       return rows;
     } catch (errpr) {
@@ -38,9 +37,9 @@ class AuthService implements IAuthService {
       password: userData.password,
       isActive: userData.isActive,
       mobileNum: userData.mobileNum,
-      location: userData.mobileNum,
+      location: userData.location,
     };
-    return await db.query("INSERT INTO user set ?", user);
+    return await db.query("INSERT INTO user SET ?", user);
   }
 
   public async login(email: string, password: string): Promise<User> {
