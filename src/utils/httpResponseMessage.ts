@@ -15,7 +15,7 @@ export class HttpResponseMessage {
         let resData = new HttpResponse();
         resData = { success: true, status: 1, message, data: [] };
         Logger.error(resData.message);
-        return resData
+        return res.send(resData);
     };
 
      /**

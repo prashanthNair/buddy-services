@@ -99,7 +99,7 @@ export class AuthController {
       const result = await this.authService.postUser(userData);
 
       if (result) {
-        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+        HttpResponseMessage.successResponse(res, "Sucessfull");
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }

@@ -39,7 +39,10 @@ class AuthService implements IAuthService {
       mobileNum: userData.mobileNum,
       location: userData.location,
     };
-    return await db.query("INSERT INTO user SET ?", user);
+    
+    let result = await db.query("INSERT INTO user SET ?", user);
+    console.log(result);
+    return result;
   }
 
   public async login(email: string, password: string): Promise<User> {
