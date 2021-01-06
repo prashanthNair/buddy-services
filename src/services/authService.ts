@@ -1,6 +1,5 @@
 import { User } from "../models/user";
 import { IAuthService } from "./IAuthService";
-import { Document } from "mongoose";
 import { db } from "../configuration/db.config";
 
 class AuthService implements IAuthService {
@@ -20,13 +19,30 @@ class AuthService implements IAuthService {
 
  /* Test method*/
    /* TODO remove hardcoded value and switch to sp*/
+  //  public async getUsers(userId: string, password: string): Promise<User> {
+  //   try { 
+  //     let sql = `SELECT userId FROM user where userId=`+userId;
+  //     const [rows, fields] = await db.query(sql); 
+  //     console.log("service", rows);
+  //     return rows;
+  //   } catch (errpr) {
+  //     return null;
+  //   }
+  // }
+
+   /* Test method*/
+   /* TODO remove hardcoded value and switch to sp*/
    public async getUsers(userId: string, password: string): Promise<User> {
     try { 
-      let sql = `SELECT userId FROM user where userId=`+userId;
-      const [rows, fields] = await db.query(sql); 
-      console.log("service", rows);
+      let sql = `call GetUsers(?,@email) select @email`;
+      //let sql = `SELECT * from user where userId=`+userId;
+      const [rows, fields] = await db.query(sql,[1],(res,err)=>{
+        console.log(err);
+        console.log(res)
+      }); 
+      console.log(rows)
       return rows;
-    } catch (errpr) {
+    } catch (error) {
       return null;
     }
   }
@@ -50,7 +66,7 @@ class AuthService implements IAuthService {
         email
       );
       return <User>rows;
-    } catch (errpr) {
+    } catch (error) {
       return null;
     }
   }
