@@ -7,3 +7,8 @@ export class User {
     isActive:Boolean|false; 
     name:any
 }
+
+export class Update { 
+    email : any;
+    password:any;
+}

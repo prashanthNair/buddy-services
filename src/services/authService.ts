@@ -1,4 +1,4 @@
-import { User } from "../models/user";
+import { Update, User } from "../models/user";
 import { IAuthService } from "./IAuthService";
 import { Document } from "mongoose";
 import { db } from "../configuration/db.config";
@@ -55,6 +55,18 @@ class AuthService implements IAuthService {
     } catch (errpr) {
       return null;
     }
+  }
+
+  public async update(userData: User): Promise<User> {
+    let user: Update = {
+      email: userData.email,
+      password: userData.password,
+      
+    };
+    let result = await db.query("UPDATE `user` SET `password`=? where `email`=?", user);
+    console.log(result);
+    return result;
+    
   }
 }
 
