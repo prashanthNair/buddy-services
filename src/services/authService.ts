@@ -1,4 +1,4 @@
-import { User } from "../models/user";
+import { Update, User } from "../models/user";
 import { IAuthService } from "./IAuthService";
 import { Document } from "mongoose";
 import { db } from "../configuration/db.config";
@@ -18,12 +18,11 @@ class AuthService implements IAuthService {
     return AuthService.instance;
   }
 
- /* Test method*/
-   /* TODO remove hardcoded value and switch to sp*/
-   public async getUsers(userId: string, password: string): Promise<User> {
+  /* Test method*/
+  public async getUsers(userId: string, password: string): Promise<User> {
     try { 
-      let sql = `SELECT userId FROM user where userId=`+userId;
-      const [rows, fields] = await db.query(sql); 
+      let sql = `CALL GetUsers(?)`;
+      const [rows, fields] = await db.query(sql,userId); 
       console.log("service", rows);
       return rows;
     } catch (errpr) {
@@ -38,9 +37,12 @@ class AuthService implements IAuthService {
       password: userData.password,
       isActive: userData.isActive,
       mobileNum: userData.mobileNum,
-      location: userData.mobileNum,
+      location: userData.location,
     };
-    return await db.query("INSERT INTO user set ?", user);
+    
+    let result = await db.query("INSERT INTO user SET ?", user);
+    console.log(result);
+    return result;
   }
 
   public async login(email: string, password: string): Promise<User> {
@@ -53,6 +55,17 @@ class AuthService implements IAuthService {
     } catch (errpr) {
       return null;
     }
+  }
+
+  public async update(userData: Update): Promise<Update> {
+    let user: Update = {
+      email: userData.email,
+      password: userData.password,
+      };
+    let result = await db.query(`UPDATE user SET password = ? WHERE email = ? `, user);
+    console.log(result);
+    return result;
+    
   }
 }
 

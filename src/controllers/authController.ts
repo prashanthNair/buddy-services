@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { IAuthService } from "../services/IAuthService";
 import { AuthService } from "../services/authService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
-import { User } from "../models/user";
+import { Update, User } from "../models/user";
 
 export class AuthController {
   private constructor() {}
@@ -99,7 +99,7 @@ export class AuthController {
       const result = await this.authService.postUser(userData);
 
       if (result) {
-        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+        HttpResponseMessage.successResponse(res, "Sucessfull");
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
@@ -128,4 +128,39 @@ export class AuthController {
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
+   
+  public async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      // validate the user credential
+      if (
+        req.body &&
+        (req.body.email.length == 0 || req.body.password.length == 0)
+      ) {
+        return HttpResponseMessage.validationErrorWithData(
+          res,
+          "Invalid inputs",
+          req
+        );
+      }
+
+      let userData: Update = {
+        email: req.body.email,
+        password: req.body.password,
+        };
+      const result = await this.authService.update(userData);
+
+      if (result) {
+        HttpResponseMessage.successResponse(res, "Sucessfully updated");
+      } else {
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+      }
+    } catch (error) {
+      HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
+    }
+  }
+
+
+
 }
+
+
