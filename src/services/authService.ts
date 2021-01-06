@@ -57,13 +57,12 @@ class AuthService implements IAuthService {
     }
   }
 
-  public async update(userData: User): Promise<User> {
+  public async update(userData: Update): Promise<Update> {
     let user: Update = {
       email: userData.email,
       password: userData.password,
-      
-    };
-    let result = await db.query("UPDATE `user` SET `password`=? where `email`=?", user);
+      };
+    let result = await db.query("UPDATE user SET password = ? WHERE email = ? ", user);
     console.log(result);
     return result;
     
