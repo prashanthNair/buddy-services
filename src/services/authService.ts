@@ -62,7 +62,7 @@ class AuthService implements IAuthService {
       email: userData.email,
       password: userData.password,
       };
-    let result = await db.query("UPDATE user SET password = ? WHERE email = ? ", user);
+    let result = await db.query(`UPDATE user SET password = ? WHERE email = ? `, user);
     console.log(result);
     return result;
     
