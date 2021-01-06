@@ -29,8 +29,7 @@ export class HttpResponseMessage {
     public static async successResponseWithData(res: Response, message: string, data: object) {
 
         let resData = new HttpResponse();
-        resData = { success: true, status: 1, message, data }; 
-        console.log(resData); 
+        resData = { success: true, status: 1, message, data };  
        return res.status(200).json(resData);
 
     };
