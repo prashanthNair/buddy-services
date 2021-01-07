@@ -37,8 +37,8 @@ class AuthService implements IAuthService {
       mobileNum: userData.mobileNum,
       location: userData.location,
     };
-    
-    let result = await db.query("INSERT INTO user SET ?", user);
+    let sql = `CALL PostUser(?)`;
+    let result = await db.query(sql,user);
     console.log(result);
     return result;
   }
