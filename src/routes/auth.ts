@@ -3,6 +3,18 @@ import { AuthController } from "../controllers/authController";
 
 const authRoutes = (app, authController: AuthController = AuthController.getInstance()) => {
  
+    app.route('/api/v1/auth/')
+    .get(async (req: Request,
+        res: Response,
+        next: NextFunction) => 
+         res.send("Welcome to Buddy Test Service.")
+    )
+    app.route('/api/v1/auth/user')
+    .get(async (req: Request,
+        res: Response,
+        next: NextFunction) =>
+        await authController.getdetails(req, res,next) 
+    )
         app.route('/api/v1/auth/register')
         .post(async (req: Request,
             res: Response,

@@ -16,18 +16,18 @@ class AuthService implements IAuthService {
     }
     return AuthService.instance;
   }
- 
+
   public async getUsers(userId: string, password: string): Promise<User> {
-    try { 
-      let sql = `CALL GetUsers(?)`;
-      const [rows, fields] = await db.query(sql,userId); 
+    try {
+      let sql = `CALL GetUsers(?)`; 
+      const [rows, fields] = await db.query(sql, userId);
       console.log("service", rows);
       return rows;
     } catch (error) {
       return null;
     }
   }
-  
+
   public async postUser(userData: User): Promise<User> {
     let user: User = {
       name: userData.name,
@@ -37,7 +37,7 @@ class AuthService implements IAuthService {
       mobileNum: userData.mobileNum,
       location: userData.location,
     };
-    
+
     let result = await db.query("INSERT INTO user SET ?", user);
     console.log(result);
     return result;
@@ -59,11 +59,13 @@ class AuthService implements IAuthService {
     let user: Update = {
       email: userData.email,
       password: userData.password,
-      };
-    let result = await db.query(`UPDATE user SET password = ? WHERE email = ? `, user);
+    };
+    let result = await db.query(
+      `UPDATE user SET password = ? WHERE email = ? `,
+      user
+    );
     console.log(result);
     return result;
-    
   }
 }
 
