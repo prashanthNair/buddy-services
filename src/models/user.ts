@@ -1,11 +1,11 @@
 export class User { 
-    email : String|undefined;
-    password:any;
-    mobileNum:any;
-    location:String|"";
-    created_date?:Date|undefined  
-    isActive:Boolean|false; 
-    name:any
+    Email : String|undefined;
+    Password:any;
+    MobileNum:any;
+    Location:String|"";
+    Created_date?:Date|undefined  
+    IsActive:Boolean|false; 
+    Name:any
 }
 
 export class Update { 
