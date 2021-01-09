@@ -1,11 +1,15 @@
 export class User { 
-    Email : String|undefined;
+    UserName:any;
+    FirstName:any;
+    LastName:any;
     Password:any;
-    MobileNum:any;
     Location:String|"";
-    Created_date?:Date|undefined  
     IsActive:Boolean|false; 
-    Name:any
+    State:any;
+    Country:any;
+    Email : String|undefined;
+    MobileNum:any;
+    Created_date?:Date|undefined  
 }
 
 export class Update { 

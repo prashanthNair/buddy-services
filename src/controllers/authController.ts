@@ -88,13 +88,18 @@ export class AuthController {
       }
 
       let userData: User = {
-        Name: req.body.name,
-        Email: req.body.email,
+        UserName: req.body.userName,
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName,
         Password: req.body.password,
-        MobileNum: req.body.mobileNum,
         Location: req.body.location,
-        Created_date: null,
         IsActive: true,
+        State: req.body.state,
+        Country: req.body.country,
+        Email: req.body.email,
+        MobileNum: req.body.mobileNum,
+        Created_date: null,
+        
       };
       const result = await this.authService.postUser(userData);
 
