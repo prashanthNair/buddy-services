@@ -8,7 +8,7 @@ export class BuddyController {
     private constructor() {}
   
     private static instance: BuddyController = null;
-    private authService = null;
+    private buddyService = null;
   
     /**
      * To get singleton instance
@@ -22,7 +22,7 @@ export class BuddyController {
       if (!BuddyController.instance) {
         BuddyController.instance = new BuddyController();
       }
-      BuddyController.instance.authService = buddyService; // mock service Object is passed as a param from .spec
+      BuddyController.instance.buddyService = buddyService; // mock service Object is passed as a param from .spec
       return BuddyController.instance;
     }
 
@@ -60,7 +60,7 @@ export class BuddyController {
         BuddyRole: req.body.buddyRole,
         
       };
-      const result = await this.authService.postBuddy(buddyData);
+      const result = await this.buddyService.postBuddy(buddyData);
 
       if (result) {
         HttpResponseMessage.successResponse(res, "Sucessfull");
