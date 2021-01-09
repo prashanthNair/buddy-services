@@ -1,6 +1,5 @@
 import { Update, User } from "../models/user";
 import { IAuthService } from "./IAuthService";
-import { Document } from "mongoose";
 import { db } from "../configuration/db.config";
 
 class AuthService implements IAuthService {
@@ -18,29 +17,35 @@ class AuthService implements IAuthService {
     return AuthService.instance;
   }
 
-  /* Test method*/
   public async getUsers(userId: string, password: string): Promise<User> {
-    try { 
+    try {
       let sql = `CALL GetUsers(?)`;
-      const [rows, fields] = await db.query(sql,userId); 
-      console.log("service", rows);
+      const [rows, fields] = await db.query(sql, userId);
       return rows;
-    } catch (errpr) {
+    } catch (error) {
       return null;
     }
   }
-  
+
   public async postUser(userData: User): Promise<User> {
     let user: User = {
-      name: userData.name,
-      email: userData.email,
-      password: userData.password,
-      isActive: userData.isActive,
-      mobileNum: userData.mobileNum,
-      location: userData.location,
+      Name: userData.Name,
+      Email: userData.Email,
+      Password: userData.Password,
+      IsActive: userData.IsActive,
+      MobileNum: userData.MobileNum,
+      Location: userData.Location,
     };
-    let sql = `CALL PostUser(?)`;
-    let result = await db.query(sql,user);
+
+    let sql = `CALL PostUser(?,?,?,?,?,?)`;
+    let result = await db.query(sql, [
+      user.Name,
+      user.Email,
+      user.Password,
+      user.IsActive,
+      user.MobileNum,
+      user.Location,
+    ]);
     console.log(result);
     return result;
   }
@@ -52,7 +57,7 @@ class AuthService implements IAuthService {
         email
       );
       return <User>rows;
-    } catch (errpr) {
+    } catch (error) {
       return null;
     }
   }
@@ -61,11 +66,13 @@ class AuthService implements IAuthService {
     let user: Update = {
       email: userData.email,
       password: userData.password,
-      };
-    let result = await db.query(`UPDATE user SET password = ? WHERE email = ? `, user);
+    };
+    let result = await db.query(
+      `UPDATE user SET password = ? WHERE email = ? `,
+      user
+    );
     console.log(result);
     return result;
-    
   }
 }
 

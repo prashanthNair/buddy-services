@@ -11,11 +11,11 @@ export class HttpResponseMessage {
      * @param  {object}   res
      */
 
-    public static async successResponse(res: Response, message: string) { 
+    public static successResponse(res: Response, message: string) { 
         let resData = new HttpResponse();
         resData = { success: true, status: 1, message, data: [] };
         Logger.error(resData.message);
-        return res.send(resData);
+        return res.status(200).json(resData);
     };
 
      /**
@@ -29,10 +29,8 @@ export class HttpResponseMessage {
     public static async successResponseWithData(res: Response, message: string, data: object) {
 
         let resData = new HttpResponse();
-        resData = { success: true, status: 1, message, data }; 
-        console.log(resData);
-        return resData
-        // return res.status(200).json(resData);
+        resData = { success: true, status: 1, message, data };  
+       return res.status(200).json(resData);
 
     };
 
@@ -43,7 +41,7 @@ export class HttpResponseMessage {
      * @param  {string}   message
      */
 
-    public static async sendErrorResponse(res: Response, message: string,error?:any) {
+    public static sendErrorResponse(res: Response, message: string,error?:any) {
 
         let resData = new HttpResponse();
         
@@ -56,9 +54,8 @@ export class HttpResponseMessage {
             }, data: []
         };
         Logger.error(resData.message);
-        console.log(resData);
-        return resData
-        // return res.status(500).json(resData);
+        console.log(resData); 
+       return res.status(500).json(resData);
     };
 
     /**

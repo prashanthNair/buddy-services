@@ -4,13 +4,24 @@ import { db } from "../configuration/db.config";
 class AuthenticationModel {
   public async register(userData: User) {
     let user: User = {
-      name: userData.name,
-      email: userData.email,
-      password: userData.password,
-      isActive: userData.isActive,
-      mobileNum: userData.mobileNum,
-      location: userData.mobileNum,
+      Name: userData.Name,
+      Email: userData.Email,
+      Password: userData.Password,
+      IsActive: userData.IsActive,
+      MobileNum: userData.MobileNum,
+      Location: userData.Location,
     };
-    return await db.query("INSERT INTO user set ?", user);
+
+    let sql = `CALL PostUser(?,?,?,?,?,?)`;
+    let result = await db.query(sql, [
+      user.Name,
+      user.Email,
+      user.Password,
+      user.IsActive,
+      user.MobileNum,
+      user.Location,
+    ]);
+    console.log(result);
+    return result;
   }
 }

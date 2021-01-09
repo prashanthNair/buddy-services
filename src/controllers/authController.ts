@@ -88,13 +88,13 @@ export class AuthController {
       }
 
       let userData: User = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        mobileNum: req.body.mobileNum,
-        location: req.body.location,
-        created_date: null,
-        isActive: true,
+        Name: req.body.name,
+        Email: req.body.email,
+        Password: req.body.password,
+        MobileNum: req.body.mobileNum,
+        Location: req.body.location,
+        Created_date: null,
+        IsActive: true,
       };
       const result = await this.authService.postUser(userData);
 
@@ -116,19 +116,18 @@ export class AuthController {
    * @param  {function} next
    */
   public async getdetails(req: Request, res: Response, next: NextFunction) {
-    try { 
-      const result = await this.authService.getUsers(0); 
-      console.log(result);
+    try {
+      const result = await this.authService.getUsers(0); // :TODO remove hardcode
       if (result) {
-          HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {
-          HttpResponseMessage.sendErrorResponse(res, "Transaction Failed")
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
     } catch (err) {
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
-   
+
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       // validate the user credential
@@ -146,7 +145,7 @@ export class AuthController {
       let userData: Update = {
         email: req.body.email,
         password: req.body.password,
-        };
+      };
       const result = await this.authService.update(userData);
 
       if (result) {
@@ -158,9 +157,4 @@ export class AuthController {
       HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
     }
   }
-
-
-
 }
-
-

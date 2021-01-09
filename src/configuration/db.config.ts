@@ -5,7 +5,8 @@ const connection= createPool({
     user: 'dbmasteruser',
     password: 'MigoBucksDevDb$1',
     database: 'DevDB_V.0.0.1',
-    connectionLimit: 10
+    connectionLimit: 10,
+    multipleStatements: true
 })
 const db = connection.promise();
 export { db }
