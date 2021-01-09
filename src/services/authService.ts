@@ -29,22 +29,30 @@ class AuthService implements IAuthService {
 
   public async postUser(userData: User): Promise<User> {
     let user: User = {
-      Name: userData.Name,
-      Email: userData.Email,
+      UserName: userData.UserName,
+      FirstName: userData.FirstName,
+      LastName: userData.LastName,
       Password: userData.Password,
-      IsActive: userData.IsActive,
-      MobileNum: userData.MobileNum,
       Location: userData.Location,
+      IsActive: userData.IsActive,
+      State: userData.State,
+      Country: userData.Country,
+      Email: userData.Email,
+      MobileNum: userData.MobileNum,
     };
 
-    let sql = `CALL PostUser(?,?,?,?,?,?)`;
+    let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?)`;
     let result = await db.query(sql, [
-      user.Name,
-      user.Email,
+      user.UserName,
+      user.FirstName,
+      user.LastName,
       user.Password,
-      user.IsActive,
-      user.MobileNum,
       user.Location,
+      user.IsActive,
+      user.State,
+      user.Country,
+      user.Email,
+      user.MobileNum,
     ]);
     console.log(result);
     return result;
