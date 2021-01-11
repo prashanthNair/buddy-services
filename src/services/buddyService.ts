@@ -50,6 +50,4 @@ class BuddyService implements IBuddyService {
   }
 }
 
-
-
 export { BuddyService };
