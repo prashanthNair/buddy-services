@@ -73,5 +73,24 @@ export class BuddyController {
     // }
   }
 
+  /**
+   * Get tasks for buddy
+   * TODO the functionality
+   * @param  {object}   req
+   * @param  {object}   res
+   * @param  {function} next
+   */
+  public async listTasks(req: Request, res: Response, next: NextFunction) {
+  
+      const result = await this.buddyService.listTasks();
+
+      try{
+        HttpResponseMessage.successResponseWithData(res, "Sucessfull",result);
+      }
+      catch(error){
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed",error);
+      }
+  }
+
 
 }

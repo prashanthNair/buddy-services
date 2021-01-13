@@ -47,7 +47,7 @@ export class AuthController {
         );
       }
 
-      const result = await this.authService.loogin(
+      const result = await this.authService.login(
         req.params.email,
         req.params.password
       );
