@@ -1,6 +1,7 @@
 import { Product } from "../models/product";
 import { IProductService } from "./IProductService";
 import { db } from "../configuration/db.config";
+import { integer } from "aws-sdk/clients/cloudfront";
 
 class ProductService implements IProductService {
   private constructor() {}
@@ -44,6 +45,18 @@ class ProductService implements IProductService {
     ]);
     console.log(result);
     return result;
+  }
+
+  public async getProduct(productId: integer): Promise<Product> {
+    
+    try {
+      console.log("ProductID"+productId);
+      let sql = `CALL GetProducts(?)`;
+      const [rows, fields] = await db.query(sql, productId);
+      return <Product> rows;
+    } catch (error) {
+      return null;
+    }
   }
   
 }

@@ -3,6 +3,7 @@ import { IProductService } from "../services/IProductService";
 import { ProductService } from "../services/productService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
 import { Product } from "../models/product";
+import { stringify } from "querystring";
 
 
 export class ProductController {
@@ -58,4 +59,28 @@ export class ProductController {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
   }
+
+/**
+   * db connect test api
+   * my sql db instance created in aws lightsail
+   * @param  {object}   req
+   * @param  {object}   res
+   * @param  {function} next
+   */
+  public async getProduct(req: Request, res: Response, next: NextFunction) {
+    
+    try {
+      // console.log(JSON.stringify(req.body));
+      
+      const result = await this.productService.getProduct(req.body.id);
+      if (result) {
+        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+      } else {
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+      }
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
+  }
+
 }
