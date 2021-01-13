@@ -74,18 +74,18 @@ export class AuthController {
    * @param  {function} next
    */
   public async postUser(req: Request, res: Response, next: NextFunction) {
-    try {
-      // validate the user credential
-      if (
-        req.body &&
-        (req.body.email.length == 0 || req.body.password.length == 0)
-      ) {
-        return HttpResponseMessage.validationErrorWithData(
-          res,
-          "Invalid inputs",
-          req
-        );
-      }
+    // try {
+    //   // validate the user credential
+    //   if (
+    //     req.body &&
+    //     (req.body.email.length == 0 || req.body.password.length == 0)
+    //   ) {
+    //     return HttpResponseMessage.validationErrorWithData(
+    //       res,
+    //       "Invalid inputs",
+    //       req
+    //     );
+    //   }
 
       let userData: User = {
         UserName: req.body.userName,
@@ -108,9 +108,9 @@ export class AuthController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
-    } catch (error) {
-      HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
-    }
+    // } catch (error) {
+    //   HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
+    // }
   }
 
   /**
