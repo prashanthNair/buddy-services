@@ -34,18 +34,19 @@ export class BuddyController {
    * @param  {function} next
    */
   public async postBuddy(req: Request, res: Response, next: NextFunction) {
-    try {
-      // validate the Buddy credential
-      if (
-        req.body &&
-        (req.body.email.length == 0 || req.body.password.length == 0)
-      ) {
-        return HttpResponseMessage.validationErrorWithData(
-          res,
-          "Invalid inputs",
-          req
-        );
-      }
+    // try 
+    // {
+    //   // validate the Buddy credential
+    //   if (
+    //     req.body &&
+    //     (req.body.email.length == 0 || req.body.password.length == 0)
+    //   ) {
+    //     return HttpResponseMessage.validationErrorWithData(
+    //       res,
+    //       "Invalid inputs",
+    //       req
+    //     );
+    //   }
 
       let buddyData: Buddy = {
         HomeTown: req.body.homeTown,
@@ -56,7 +57,7 @@ export class BuddyController {
         Country: req.body.country,
         MobileNum: req.body.mobileNum,
         ParentId: req.body.parentId,
-        Created_date: null,
+        CreatedDate: req.body.createdDate,
         BuddyRole: req.body.buddyRole,
         
       };
@@ -67,9 +68,9 @@ export class BuddyController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
-    } catch (error) {
-      HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
-    }
+    // } catch (error) {
+    //   HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
+    // }
   }
 
 

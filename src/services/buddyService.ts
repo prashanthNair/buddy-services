@@ -24,10 +24,11 @@ class BuddyService implements IBuddyService {
       Country: buddyData.Country,
       MobileNum: buddyData.MobileNum,
       ParentId: buddyData.ParentId,
+      CreatedDate:buddyData.CreatedDate,
       BuddyRole: buddyData.BuddyRole,
     };
 
-    let sql = `CALL PostBuddy(?,?,?,?,?,?,?,?,?)`;
+    let sql = `CALL PostBuddy(?,?,?,?,?,?,?,?,?,?)`;
     let result = await db.query(sql, [
       buddy.HomeTown,
       buddy.TeamId,
@@ -37,7 +38,8 @@ class BuddyService implements IBuddyService {
       buddy.Country,
       buddy.MobileNum,
       buddy.ParentId,
-      buddy.BuddyRole,
+      buddy.CreatedDate,
+      buddy.BuddyRole 
     ]);
     console.log(result);
     return result;

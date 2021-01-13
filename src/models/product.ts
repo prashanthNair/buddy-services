@@ -1,13 +1,14 @@
 export class Product {
+  [x: string]: string;
   Name: string;
-  Brand: string;
   Category: string;
   Type: string;
-  ActualPrice: Number;/*Price Including Tax */
+  Brand: string;
+  Currency:string;  
+  Description: string;
   SellingPrice: string;
-  Description: String;
-  GST:Number;
-  MRP:Number;
-  Currency:String;  
-  Created_date?: Date | undefined;
+  GST:any;
+  MRP:any;
+  Created_date?: any | undefined;
+  ActualPrice: string ;/*Price Including Tax */
 }

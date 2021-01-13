@@ -7,6 +7,6 @@ export class Buddy {
     Country:any;
     MobileNum:any;
     ParentId:any;
-    Created_date?:Date|undefined  
+    CreatedDate:any;  
     BuddyRole:any;
 }
