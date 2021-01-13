@@ -27,9 +27,10 @@ class ProductService implements IProductService {
       MRP:productData.MRP,
       Created_date: productData.Created_date,
       ActualPrice: productData.ActualPrice,
+      BusinessId:productData.BusinessId
     };
 
-    let sql = `CALL PostProduct(?,?,?,?,?,?,?,?,?,?,?)`;
+    let sql = `CALL PostProduct(?,?,?,?,?,?,?,?,?,?,?,?)`;
     let result = await db.query(sql, [
       product.Name,
       product.Category,
@@ -41,7 +42,8 @@ class ProductService implements IProductService {
       product.GST,
       product.MRP,
       product.Created_date,
-      product.ActualPrice
+      product.ActualPrice,
+      product.BusinessId
     ]);
     console.log(result);
     return result;
@@ -50,9 +52,20 @@ class ProductService implements IProductService {
   public async getProduct(productId: integer): Promise<Product> {
     
     try {
-      console.log("ProductID"+productId);
+      console.log("Product ID"+productId);
       let sql = `CALL GetProducts(?)`;
       const [rows, fields] = await db.query(sql, productId);
+      return <Product> rows;
+    } catch (error) {
+      return null;
+    }
+  }
+  public async getProducts(businessId: integer): Promise<Product> {
+    
+    try {
+      console.log("Business ID is"+ businessId);
+      let sql = `CALL GetProductsByBusinessId(?)`;
+      const [rows, fields] = await db.query(sql, businessId);
       return <Product> rows;
     } catch (error) {
       return null;

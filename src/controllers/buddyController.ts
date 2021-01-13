@@ -61,6 +61,7 @@ export class BuddyController {
         BuddyRole: req.body.buddyRole,
         
       };
+      console.log
       const result = await this.buddyService.postBuddy(buddyData);
 
       if (result) {

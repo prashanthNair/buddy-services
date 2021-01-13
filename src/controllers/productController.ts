@@ -49,6 +49,7 @@ export class ProductController {
           MRP: req.body.mrp,
           Created_date: req.body.createdDate,
           ActualPrice: req.body.actualPrice,
+          BusinessId:req.body.businessId
         
       };
       const result = await this.productService.postProduct(productData);
@@ -82,5 +83,29 @@ export class ProductController {
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
+
+  /**
+   * db connect test api
+   * my sql db instance created in aws lightsail
+   * @param  {object}   req
+   * @param  {object}   res
+   * @param  {function} next
+   */
+  //To get products details by business id
+  public async getProducts(req: Request, res: Response, next: NextFunction) {
+    
+    try {
+      const result = await this.productService.getProducts(req.body.id);
+      if (result) {
+        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+      } else {
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+      }
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
+  }
+
+  
 
 }
