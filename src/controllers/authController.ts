@@ -37,8 +37,8 @@ export class AuthController {
     try {
       // validate the user credential
       if (
-        req.body &&
-        (req.body.email.length == 0 || req.body.password.length == 0)
+        req.params &&
+        (req.params.email.length == 0 || req.params.password.length == 0)
       ) {
         return HttpResponseMessage.validationErrorWithData(
           res,
@@ -48,8 +48,8 @@ export class AuthController {
       }
 
       const result = await this.authService.login(
-        req.body.email,
-        req.body.password
+        req.params.email,
+        req.params.password
       );
 
       if (result) {
@@ -122,7 +122,7 @@ export class AuthController {
    */
   public async getdetails(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.authService.getUsers(0); // :TODO remove hardcode
+      const result = await this.authService.getUsers(1); // :TODO remove hardcode
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {

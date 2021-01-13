@@ -9,8 +9,7 @@ var swaggerUi = require('swagger-ui-express');
 import * as AWS from 'aws-sdk' 
 class App {
 
-    public app = express();
- 
+    public app = express(); 
 
     private options: cors.CorsOptions = {
         allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
@@ -28,9 +27,10 @@ class App {
     }
 
     private config(): void {
+        this.app.use(cors())
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));  
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
     }
  
 }
