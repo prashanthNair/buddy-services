@@ -37,7 +37,7 @@ class BuddyService implements IBuddyService {
       buddy.Country,
       buddy.MobileNum,
       buddy.ParentId,
-      buddy.BuddyRole
+      buddy.BuddyRole,
     ]);
     console.log(result);
     return result;
