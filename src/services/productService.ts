@@ -15,38 +15,44 @@ class ProductService implements IProductService {
   }
 
   public async postProduct(productData: Product): Promise<Product> {
-    let product: Product = {
-      Name: productData.Name,
-      Category: productData.Category,
-      Type:productData.Type,
-      Brand: productData.Brand,
-      Currency: productData.Currency,
-      Description: productData.Description,
-      SellingPrice: productData.SellingPrice,
-      GST: productData.GST,
-      MRP:productData.MRP,
-      Created_date: productData.Created_date,
-      ActualPrice: productData.ActualPrice,
-      BusinessId:productData.BusinessId
-    };
-
-    let sql = `CALL PostProduct(?,?,?,?,?,?,?,?,?,?,?,?)`;
-    let result = await db.query(sql, [
-      product.Name,
-      product.Category,
-      product.Type,
-      product.Brand,
-      product.Currency,
-      product.Description,
-      product.SellingPrice,
-      product.GST,
-      product.MRP,
-      product.Created_date,
-      product.ActualPrice,
-      product.BusinessId
-    ]);
-    console.log(result);
-    return result;
+    try {
+      let product: Product = {
+        Name: productData.Name,
+        Category: productData.Category,
+        Type:productData.Type,
+        Brand: productData.Brand,
+        Currency: productData.Currency,
+        Description: productData.Description,
+        SellingPrice: productData.SellingPrice,
+        GST: productData.GST,
+        MRP:productData.MRP,
+        Created_date: productData.Created_date,
+        ActualPrice: productData.ActualPrice,
+        BusinessId:productData.BusinessId
+      };
+  
+      let sql = `CALL PostProduct(?,?,?,?,?,?,?,?,?,?,?,?)`;
+      let result = await db.query(sql, [
+        product.Name,
+        product.Category,
+        product.Type,
+        product.Brand,
+        product.Currency,
+        product.Description,
+        product.SellingPrice,
+        product.GST,
+        product.MRP,
+        product.Created_date,
+        product.ActualPrice,
+        product.BusinessId
+      ]);
+      console.log(result);
+      return result;
+      
+    } catch (error) {
+      return error
+      
+    }
   }
 
   public async getProduct(productId: integer): Promise<Product> {

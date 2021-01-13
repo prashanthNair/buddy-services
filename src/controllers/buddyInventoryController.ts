@@ -33,24 +33,27 @@ export class BuddyInventoryController {
    * @param  {function} next
    */
   public async postBuddyInventory(req: Request, res: Response, next: NextFunction) {
+      try{
 
-    let buddyInventoryData: BuddyInventory = {
-        ProductId: req.body.productId,
-        Type: req.body.type,
-        ProductCategory: req.body.productCategory,
-        CreatedDate: req.body.createdDate,
-        IsAvailable: req.body.isAvailable,
-        BuddyMargin: req.body.buddyMargin,
-        };
-      console.log
-      const result = await this.buddyInventoryService.postBuddyInventory(buddyInventoryData);
+          let buddyInventoryData: BuddyInventory = {
+              ProductId: req.body.productId,
+              Type: req.body.type,
+              ProductCategory: req.body.productCategory,
+              CreatedDate: req.body.createdDate,
+              IsAvailable: req.body.isAvailable,
+              BuddyMargin: req.body.buddyMargin,
+              };
+            console.log
+            const result = await this.buddyInventoryService.postBuddyInventory(buddyInventoryData);
+      
+            if (result) {
+              HttpResponseMessage.successResponse(res, "Sucessfull");
+            } else {
+              HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+            }
 
-      if (result) {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
-      } else {
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+      } catch (err) {
+        HttpResponseMessage.sendErrorResponse(res, err);
       }
-
-  }
-
+      }
 }

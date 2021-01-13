@@ -34,21 +34,8 @@ export class BuddyController {
    * @param  {function} next
    */
   public async postBuddy(req: Request, res: Response, next: NextFunction) {
-    // try 
-    // {
-    //   // validate the Buddy credential
-    //   if (
-    //     req.body &&
-    //     (req.body.email.length == 0 || req.body.password.length == 0)
-    //   ) {
-    //     return HttpResponseMessage.validationErrorWithData(
-    //       res,
-    //       "Invalid inputs",
-    //       req
-    //     );
-    //   }
-
-      let buddyData: Buddy = {
+    try{
+        let buddyData: Buddy = {
         HomeTown: req.body.homeTown,
         TeamId: req.body.teamId,
         UserId: req.body.userId,
@@ -63,15 +50,16 @@ export class BuddyController {
       };
       console.log
       const result = await this.buddyService.postBuddy(buddyData);
-
+  
       if (result) {
         HttpResponseMessage.successResponse(res, "Sucessfull");
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
-    // } catch (error) {
-    //   HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
-    // }
+    }catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
+
   }
 
 

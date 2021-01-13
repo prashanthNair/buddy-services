@@ -15,34 +15,39 @@ class BuddyService implements IBuddyService {
   }
 
   public async postBuddy(buddyData: Buddy): Promise<Buddy> {
-    let buddy: Buddy = {
-      HomeTown: buddyData.HomeTown,
-      TeamId: buddyData.TeamId,
-      UserId: buddyData.UserId,
-      IsActive: buddyData.IsActive,
-      State: buddyData.State,
-      Country: buddyData.Country,
-      MobileNum: buddyData.MobileNum,
-      ParentId: buddyData.ParentId,
-      CreatedDate:buddyData.CreatedDate,
-      BuddyRole: buddyData.BuddyRole,
-    };
-
-    let sql = `CALL PostBuddy(?,?,?,?,?,?,?,?,?,?)`;
-    let result = await db.query(sql, [
-      buddy.HomeTown,
-      buddy.TeamId,
-      buddy.UserId,
-      buddy.IsActive,
-      buddy.State,
-      buddy.Country,
-      buddy.MobileNum,
-      buddy.ParentId,
-      buddy.CreatedDate,
-      buddy.BuddyRole 
-    ]);
-    console.log(result);
-    return result;
+    try {
+      
+      let buddy: Buddy = {
+        HomeTown: buddyData.HomeTown,
+        TeamId: buddyData.TeamId,
+        UserId: buddyData.UserId,
+        IsActive: buddyData.IsActive,
+        State: buddyData.State,
+        Country: buddyData.Country,
+        MobileNum: buddyData.MobileNum,
+        ParentId: buddyData.ParentId,
+        CreatedDate:buddyData.CreatedDate,
+        BuddyRole: buddyData.BuddyRole,
+      };
+  
+      let sql = `CALL PostBuddy(?,?,?,?,?,?,?,?,?,?)`;
+      let result = await db.query(sql, [
+        buddy.HomeTown,
+        buddy.TeamId,
+        buddy.UserId,
+        buddy.IsActive,
+        buddy.State,
+        buddy.Country,
+        buddy.MobileNum,
+        buddy.ParentId,
+        buddy.CreatedDate,
+        buddy.BuddyRole 
+      ]);
+      console.log(result);
+      return result;
+    } catch (error) {
+      return error
+    }
   }
 
   public async listTask(): Promise<Object> {

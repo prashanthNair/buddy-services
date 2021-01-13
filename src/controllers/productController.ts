@@ -36,7 +36,7 @@ export class ProductController {
    * @param  {function} next
    */
   public async postProduct(req: Request, res: Response, next: NextFunction) {
-    
+    try{
       let productData: Product = {
           Name: req.body.productName,
           Category: req.body.category,
@@ -59,6 +59,9 @@ export class ProductController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
+    }catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
   }
 
 /**
@@ -71,7 +74,6 @@ export class ProductController {
   public async getProduct(req: Request, res: Response, next: NextFunction) {
     
     try {
-      // console.log(JSON.stringify(req.body));
       
       const result = await this.productService.getProduct(req.body.id);
       if (result) {
