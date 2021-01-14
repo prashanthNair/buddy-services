@@ -9,7 +9,7 @@ info:
     [http://migobucks.in].
   version: 1.0.0
 servers: 
-- url: http://localhost:3000/v1
+- url: http://localhost:3000/api/v1
   description: Migobucks Buddy Api
 tags:
 - name: Buddy
