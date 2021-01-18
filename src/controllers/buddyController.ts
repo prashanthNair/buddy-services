@@ -75,7 +75,7 @@ export class BuddyController {
 
   /**
    * Get tasks for buddy
-   * TODO the functionality
+   * 
    * @param  {object}   req
    * @param  {object}   res
    * @param  {function} next

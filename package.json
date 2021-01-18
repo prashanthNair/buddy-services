@@ -15,6 +15,7 @@
   "license": "",
   "dependencies": {
     "@types/express": "^4.16.1",
+    "apidoc": "^0.26.0",
     "aws-sdk": "^2.820.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
