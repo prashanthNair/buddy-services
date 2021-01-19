@@ -1,9 +1,12 @@
 import { Request, Response, NextFunction } from "express";
+import { format } from "path";
 import { AuthController } from "../controllers/authController";
+import {BuddyUserController} from "../controllers/buddyUserController";
 
 const authRoutes = (
   app,
-  authController: AuthController = AuthController.getInstance()
+  authController: AuthController = AuthController.getInstance(),
+  buddyUserController:BuddyUserController= BuddyUserController.getInstance()
 ) => {
   app
     .route("/")
@@ -16,6 +19,12 @@ const authRoutes = (
     .post(
       async (req: Request, res: Response, next: NextFunction) =>
         await authController.postUser(req, res, next)
+    );
+  app
+    .route("/api/v1/auth/buddyUserRegister")
+    .post(
+      async (req: Request, res: Response, next: NextFunction) =>
+        await buddyUserController.postBuddyUser(req, res, next)
     );
   app
     .route("/api/v1/auth/user")
