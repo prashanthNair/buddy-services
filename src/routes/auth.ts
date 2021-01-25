@@ -2,17 +2,25 @@ import { Request, Response, NextFunction } from "express";
 import { format } from "path";
 import { AuthController } from "../controllers/authController";
 import {BuddyUserController} from "../controllers/buddyUserController";
+import { UserReferenceController } from "../controllers/userReferenceController";
 
 const authRoutes = (
   app,
   authController: AuthController = AuthController.getInstance(),
-  buddyUserController:BuddyUserController= BuddyUserController.getInstance()
+  buddyUserController:BuddyUserController= BuddyUserController.getInstance(),
+  userReferenceController:UserReferenceController= UserReferenceController.getInstance()
 ) => {
   app
     .route("/")
     .get(
        (req: Request, res: Response, next: NextFunction) =>
         res.send("Welcome to Migobucks")
+    );
+  app
+    .route("/api/v1/auth/initialRegister")
+    .post(
+      async (req: Request, res: Response, next: NextFunction) =>
+        await userReferenceController.postUserReference(req, res, next)
     );
   app
     .route("/api/v1/auth/register")
