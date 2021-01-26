@@ -72,18 +72,6 @@ export class AuthController {
   }
   
   public async postUser(req: Request, res: Response, next: NextFunction) {
-    // try {
-    //   // validate the user credential
-    //   if (
-    //     req.body &&
-    //     (req.body.email.length == 0 || req.body.password.length == 0)
-    //   ) {
-    //     return HttpResponseMessage.validationErrorWithData(
-    //       res,
-    //       "Invalid inputs",
-    //       req
-    //     );
-    //   }
 
       let userData: User = {
         UserName: req.body.userName,
@@ -106,9 +94,7 @@ export class AuthController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
-    // } catch (error) {
-    //   HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
-    // }
+
   }
 
   /**
@@ -120,7 +106,7 @@ export class AuthController {
    */
   public async getdetails(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.authService.getUsers(1); // :TODO remove hardcode
+      const result = await this.authService.getUsers(0); // :TODO remove hardcode
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {
