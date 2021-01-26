@@ -11,4 +11,5 @@ export class Product {
   MRP:any;
   Created_date?: any | undefined;
   ActualPrice: string ;/*Price Including Tax */
+  BusinessId:string;
 }
