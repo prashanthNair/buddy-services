@@ -4,54 +4,73 @@ import { AuthController } from "../controllers/authController";
 import {BuddyUserController} from "../controllers/buddyUserController";
 import { UserReferenceController } from "../controllers/userReferenceController";
 
+
+
 const authRoutes = (
   app,
   authController: AuthController = AuthController.getInstance(),
   buddyUserController:BuddyUserController= BuddyUserController.getInstance(),
   userReferenceController:UserReferenceController= UserReferenceController.getInstance()
 ) => {
-  /**
-   * @apiDefine successResponse
-   * @apiSuccess {String} status=1 Status of API request
-   * @apiSuccess {Boolean} success=true 
-   * @apiSuccess {String} message="Sucessfull"
-   * @apiSuccess {Object[]} data=[]
-   */
 
-   /**
-   * @apiDefine errorResponse
-   * @apiError {Integer} status=0 Status of API request
-   * @apiError {Boolean} success=false
-   * @apiError {String} message
-   * @apiError {Object} error
-   * @apiError {Integer} error.code=500 Error code
-   * @apiError {String} error.message Error message
-   * @apiError {Object} error.stackTrace Stacktrace of the error occured
-   * @apiError {Object} error.params
-   */
+  console.log(__filename);
+
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      User:
+ *        type: object
+ *        required:
+ *          - name
+ *          - email
+ *        properties:
+ *          name:
+ *            type: string
+ *          email:
+ *            type: string
+ *            format: email
+ *            description: Email for the user, needs to be unique.
+ *        example:
+ *           name: Alexander
+ *           email: fake@email.com
+ */
+
+  /**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: User management
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /users/:
+ *    post:
+ *      summary: Create a new user
+ *      tags: [Users]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ */
   app
     .route("/")
     .get(
        (req: Request, res: Response, next: NextFunction) =>
         res.send("Welcome to Migobucks")
     );
-     /**
-   * @api {post} /api/v1/auth/register
-   * @apiGroup Authentication
-   * @apiName Create Buddy
-   * @apiDescription Register a buddy  
-   * @apiParam (Body) {String} userName Username of the buddy.
-   * @apiParam (Body) {String} firstName  Firstname of the buddy
-   * @apiParam (Body) {String} lastName
-   * @apiParam (Body) {String} password    
-   * @apiParam (Body) {String} location
-   * @apiParam (Body) {String} state
-   * @apiParam (Body) {String} country
-   * @apiParam (Body) {String} email
-   * @apiParam (Body) {Integer} number    
-   * @apiUse successResponse  
-   * @apiUse errorResponse  
-   */
+     
   app
     .route("/api/v1/auth/initialRegister")
     .post(
