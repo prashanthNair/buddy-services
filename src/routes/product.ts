@@ -15,7 +15,7 @@ const productRoutes = (app, productController: ProductController = ProductContro
         next: NextFunction) =>
         await productController.getProduct(req, res,next)
     )
-    // app.route('/api/v1/product/detail')
+    // app.route('/api/v1/product/detail') Comment due to build error
     // .get(async (req: Request,
     //     res: Response,
     //     next: NextFunction) =>
