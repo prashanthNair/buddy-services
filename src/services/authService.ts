@@ -28,34 +28,39 @@ class AuthService implements IAuthService {
   }
 
   public async postUser(userData: User): Promise<User> {
-    let user: User = {
-      UserName: userData.UserName,
-      FirstName: userData.FirstName,
-      LastName: userData.LastName,
-      Password: userData.Password,
-      Location: userData.Location,
-      IsActive: userData.IsActive,
-      State: userData.State,
-      Country: userData.Country,
-      Email: userData.Email,
-      MobileNum: userData.MobileNum,
-    };
+    try{
+      let user: User = {
+        UserName: userData.UserName,
+        FirstName: userData.FirstName,
+        LastName: userData.LastName,
+        Password: userData.Password,
+        Location: userData.Location,
+        IsActive: userData.IsActive,
+        State: userData.State,
+        Country: userData.Country,
+        Email: userData.Email,
+        MobileNum: userData.MobileNum,
+      };
+  
+      let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?)`;
+      let result = await db.query(sql, [
+        user.UserName,
+        user.FirstName,
+        user.LastName,
+        user.Password,
+        user.Location,
+        user.IsActive,
+        user.State,
+        user.Country,
+        user.Email,
+        user.MobileNum,
+      ]);
+      console.log(result);
+      return result;
 
-    let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?)`;
-    let result = await db.query(sql, [
-      user.UserName,
-      user.FirstName,
-      user.LastName,
-      user.Password,
-      user.Location,
-      user.IsActive,
-      user.State,
-      user.Country,
-      user.Email,
-      user.MobileNum,
-    ]);
-    console.log(result);
-    return result;
+    }catch (err) {
+      return err;
+    }
   }
 
   public async login(email: string, password: string): Promise<User> {
@@ -72,17 +77,22 @@ class AuthService implements IAuthService {
   }
 
   public async update(userData: Update): Promise<Update> {
-    let user: Update = {
-      email: userData.email,
-      password: userData.password,
-    };
-    let result = await db.query(
-      `UPDATE user SET password = ? WHERE email = ? `,
-      user
-    );
-    console.log(result);
-    return result;
+    try{
+
+      let user: Update = {
+        email: userData.email,
+        password: userData.password,
+      };
+      let result = await db.query(
+        `UPDATE user SET password = ? WHERE email = ? `,
+        user
+      );
+      console.log(result);
+      return result;
+    }catch (err) {
+      return err;
+    }
+  } 
   }
-}
 
 export { AuthService };
