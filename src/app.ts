@@ -32,7 +32,7 @@ class App {
         // Swagger api doc meta data definitions
         swaggerDefinition : swaggerDocument,
         // Paths to files containing OpenAPI definitions
-        apis: ["./dist/routes/*.js"]
+        apis: ["./dist/models/jsdoc-components.js","./dist/routes/*.js"]
       };
 
     private config(): void {
