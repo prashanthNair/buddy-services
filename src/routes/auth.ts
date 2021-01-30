@@ -32,7 +32,7 @@ const authRoutes = (
  * @swagger
  * /api/v1/auth/register:
  *   post:
- *     summary: Register a buddy user.
+ *     summary: Register a user.
  *     requestBody:
  *       required: true
  *       content:
@@ -41,7 +41,7 @@ const authRoutes = (
  *             $ref: '#/components/schemas/User'
  *     responses:
  *       201:
- *         description: Buddy user registered successfully
+ *         description: User registered successfully
  *         content:
  *           application/json:
  *             schema:
@@ -56,12 +56,37 @@ const authRoutes = (
       async (req: Request, res: Response, next: NextFunction) =>
         await authController.postUser(req, res, next)
     );
+
+/**
+ * @swagger
+ * /api/v1/auth/buddyUserRegister:
+ *   post:
+ *     summary: Register a buddy user.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/BuddyUser'
+ *     responses:
+ *       201:
+ *         description: Buddy user registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *                 
+*/
   app
     .route("/api/v1/auth/buddyUserRegister")
     .post(
       async (req: Request, res: Response, next: NextFunction) =>
         await buddyUserController.postBuddyUser(req, res, next)
     );
+
+
   app
     .route("/api/v1/auth/user")
     .get(

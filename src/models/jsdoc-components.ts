@@ -7,6 +7,43 @@
  *        properties:
  *          userName:
  *            type: string
+ *            description: User name for the user, needs to be unique
+ *          firstName:
+ *            type: string
+ *            description: First name of the user
+ *          lastName:
+ *            type: string
+ *            description: Last name of the user
+ *          password:
+ *            type: string
+ *            description: Password for the user account
+ *          location:
+ *            type: string
+ *            description: Current location of the user
+ *          state:
+ *            type: string
+ *            description: Residing state of the user
+ *          country:
+ *            type: string
+ *            description: Residing country of the user
+ *          email:
+ *            type: string
+ *            description: Email ID of the user
+ *            format: email
+ *          mobileNum:
+ *            type: integer
+ *            description: Mobile number of the user
+ */
+
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      BuddyUser:
+ *        type: object
+ *        properties:
+ *          userName:
+ *            type: string
  *            description: User name for the buddy user, needs to be unique
  *          firstName:
  *            type: string
@@ -33,7 +70,36 @@
  *          mobileNum:
  *            type: integer
  *            description: Mobile number of the buddy user
+ *          roleId:
+ *            type: integer
+ *            description: Role Id of the buddy user
+ *          roleName:
+ *            type: string
+ *            description: Role Name of the buddy user
+ *          status:
+ *            type: string
+ *            description: Status of the buddy user
+ *          homeTown:
+ *            type: string
+ *            description: Hometown of the buddy user
+ *          teamId:
+ *            type: integer
+ *            description: Team Id of the buddy user
+ *          isActive:
+ *            type: string
+ *            description: Account activation of the buddy user
+ *          parentId:
+ *            type: integer
+ *            description: Parent Id of the buddy user
+ *          createdDate:
+ *            type: integer
+ *            description: Date of the buddy user creation
+ *            format: date
+ *          buddyRole:
+ *            type: string
+ *            description: Role of the buddy user
  */
+
 
 /**
  * @swagger
@@ -56,6 +122,7 @@
  *            example: Transaction successfull
  *
  */
+
 /**
  * @swagger
  *  components:
