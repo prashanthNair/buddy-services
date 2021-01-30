@@ -1,4 +1,4 @@
-import { Buddy } from "../models/buddy";
+import { Buddy,Task } from "../models/buddy";
 import { db } from "../configuration/db.config";
 import { IBuddyService } from "./IBuddyService";
 
@@ -50,8 +50,10 @@ class BuddyService implements IBuddyService {
     }
   }
 
-  public async listTask(): Promise<Object> {
-    throw new Error("Method not implemented.");
+  public async listTask(): Promise<Task> {
+    let sql = `CALL GetBuddyInventoryProducts(?)`;
+      const [rows, fields] = await db.query(sql);
+      return <Task> rows;
   }
 }
 

@@ -10,6 +10,11 @@ const buddyRoutes = (app, buddyController: BuddyController = BuddyController.get
         await buddyController.postBuddy(req, res,next)
     ) 
 
+    app.route('/api/v1/tasks')
+    .get(async (req: Request,
+        res: Response,
+        next: NextFunction) =>
+        await buddyController.listTasks(req, res,next))
 
 }
 export default buddyRoutes;
