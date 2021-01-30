@@ -10,3 +10,18 @@ export class Buddy {
     CreatedDate:any;  
     BuddyRole:any;
 }
+
+export class Task {
+    ProductId:any;
+    ProductName: string;
+  Category: string;
+  Type: string;
+  BuddyMargin: any;
+  Brand: string;
+  Currency:string;  
+  Description: string;
+  SellingPrice: string;
+  GST:any;
+  MRP:any;
+  ActualPrice: string ;/*Price Including Tax */
+}

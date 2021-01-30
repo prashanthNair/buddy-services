@@ -21,7 +21,5 @@ const productRoutes = (app, productController: ProductController = ProductContro
         next: NextFunction) =>
         await productController.getProducts(req, res,next)
     )
-
-
 }
 export default productRoutes;

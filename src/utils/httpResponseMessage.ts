@@ -48,7 +48,7 @@ export class HttpResponseMessage {
         resData = {
             success: false, status: 0, message, error: {
                 code: 500,
-                message: 'INTERNAL_SERVER_ERROR',
+                message: message,
                 stackTrace:error,
                 params:error
             }, data: []
