@@ -2,8 +2,8 @@ export const swaggerDocument = {
   openapi: '3.0.0',
   "info": {
     "version": "1.0.0",
-    "title": "Migobuks Buddy",
-    "description": "Migobuks API Application ",
+    "title": "Migobucks Buddy",
+    "description": "Migobucks API Application ",
     "license": {
       "name": "",
       "url": ""

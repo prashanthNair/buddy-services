@@ -13,6 +13,23 @@ const authRoutes = (
   userReferenceController:UserReferenceController= UserReferenceController.getInstance()
 ) => { 
 
+/**
+ * @swagger
+ * /api/v1/auth/user:
+ *   get:
+ *     summary: Login Page.
+ *        
+ *     responses:
+ *       201:
+ *         description: Login Page successfully retrieved        
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       
+ *                 
+*/
+
   app
     .route("/")
     .get(
@@ -28,7 +45,7 @@ const authRoutes = (
     );
 
   
-  /**
+/**
  * @swagger
  * /api/v1/auth/register:
  *   post:
@@ -147,7 +164,7 @@ const authRoutes = (
         await authController.getdetails(req, res, next)
     );  
 
-    /**
+/**
  * @swagger
  * /api/v1/auth/login/{email}/{password}:
  *   get:
