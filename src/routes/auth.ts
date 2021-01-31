@@ -36,8 +36,30 @@ const authRoutes = (
        (req: Request, res: Response, next: NextFunction) =>
         res.send("Welcome to Migobucks")
     );
-     
-  app
+
+/**
+ * @swagger
+ * /api/v1/auth/initialRegister:
+ *   post:
+ *     summary: Register a user with mobile number .
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Initial_registration'
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *                 
+*/
+   app
     .route("/api/v1/auth/initialRegister")
     .post(
       async (req: Request, res: Response, next: NextFunction) =>

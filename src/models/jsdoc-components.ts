@@ -39,6 +39,18 @@
  * @swagger
  *  components:
  *    schemas:
+ *      Initial_registration:
+ *        type: object
+ *        properties:
+ *          mobileNum:
+ *            type: string
+ *            description: Mobile Number for the user.
+ */
+
+/**
+ * @swagger
+ *  components:
+ *    schemas:
  *      BuddyUser:
  *        type: object
  *        properties:
