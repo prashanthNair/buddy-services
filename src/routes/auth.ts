@@ -94,6 +94,51 @@ const authRoutes = (
         await authController.getdetails(req, res, next)
     );
 
+/**
+ * @swagger
+ * /api/v1/auth/user/{email}/{password}:
+ *   get:
+ *     summary: Show buddy user details.
+ *     parameters:
+ *       - in: path
+ *         name: email
+ *         required: true
+ *         description: Email ID of the buddy user account
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: password
+ *         required: true
+ *         description: Password of the buddy user account
+ *         schema:
+ *           type: string
+ *           
+ *     responses:
+ *       201:
+ *         description: Buddy user details successfully retrieved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/SuccessResponse'
+ *                 - type: object
+ *                   properties:
+ *                     data:
+ *                       type: object
+ *                       properties:
+ *                         email:
+ *                           type: string
+ *                           description: Email of the Valid user
+ *                           example: buddy@migobucks.com
+ *               
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       
+ *                 
+*/
+
   
   app
     .route("/api/v1/auth/user/:email/:password")
