@@ -123,6 +123,45 @@
  *            type: string
  *            description: Role of the buddy user
  */
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Buddy:
+ *        type: object
+ *        properties:
+ *          homeTown:
+ *            type: string
+ *            description: Home Town of the user
+ *          teamId:
+ *            type: string
+ *            description: Team ID of the user
+ *          userId:
+ *            type: string
+ *            description: User ID of the user
+ *          isActive:
+ *            type: string
+ *            description: Active/Inactive State of the user account
+ *          state:
+ *            type: string
+ *            description: Residing State of the user
+ *          country:
+ *            type: string
+ *            description: Residing Country of the user
+ *          mobileNum:
+ *            type: string
+ *            description: Mobile Number of the user
+ *          parentId:
+ *            type: string
+ *            description: Parent ID of the user
+ *          createdDate:
+ *            type: string
+ *            description: Date of Creation.
+ *            format: date
+ *          buddyRole:
+ *            type: string
+ *            description: Role of the user
+ */
 
 
 /**
