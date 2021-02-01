@@ -162,6 +162,33 @@
  *            type: string
  *            description: Role of the user
  */
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Buddy_Inventory:
+ *        type: object
+ *        properties:
+ *          productId:
+ *            type: string
+ *            description: ID of the Product
+ *          type:
+ *            type: string
+ *            description: Type of the Product
+ *          productCategory:
+ *            type: string
+ *            description: Category of the Product
+ *          createdDate:
+ *            type: string
+ *            description: Date of Product Registration
+ *            format: date 
+ *          isAvailable:
+ *            type: string
+ *            description: Product is available or not.
+ *          buddyMargin:
+ *            type: string
+ *            description: Margin available to buddy
+ */
 
 
 /**
