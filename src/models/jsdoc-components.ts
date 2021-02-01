@@ -51,6 +51,18 @@
  * @swagger
  *  components:
  *    schemas:
+ *      User_email:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: int
+ *            description: ID of the user.
+ */
+
+/**
+ * @swagger
+ *  components:
+ *    schemas:
  *      BuddyUser:
  *        type: object
  *        properties:

@@ -15,7 +15,7 @@ const authRoutes = (
 
 /**
  * @swagger
- * /api/v1/auth/user:
+ * /:
  *   get:
  *     summary: Login Page.
  *        
@@ -124,7 +124,28 @@ const authRoutes = (
       async (req: Request, res: Response, next: NextFunction) =>
         await buddyUserController.postBuddyUser(req, res, next)
     );
-
+/**
+ * @swagger
+ * /api/v1/auth/user:
+ *   get:
+ *     summary: Show user details.
+ *     parameters:
+ *       - in: body
+ *         name: id
+ *         required: true
+ *         description: ID of the User account
+ *         schema:
+ *           type: string
+ *     responses:
+ *       201:
+ *         $ref: '#/components/responses/SuccessResponse'
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       
+ *                 
+*/
 
   app
     .route("/api/v1/auth/user")
