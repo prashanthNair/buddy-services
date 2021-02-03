@@ -75,7 +75,7 @@ export class ProductController {
     
     try {
       
-      const result = await this.productService.getProduct(req.body.id);
+      const result = await this.productService.getProduct(req.query.id);
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {

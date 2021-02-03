@@ -30,8 +30,31 @@ const productRoutes = (app, productController: ProductController = ProductContro
         next: NextFunction) =>
         await productController.postProduct(req, res,next)
     ) 
+/**
+ * @swagger
+ * /api/v1/product/detailbyid:
+ *   get:
+ *     summary: Shows details of product table by product ID.
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         description: Product ID of the product
+ *         schema:
+ *           type: string
+ *           
+ *     responses:
+ *       201:
+ *         $ref: '#/components/responses/Success'
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       
+ *                 
+*/    
       
-    app.route('/api/v1/product/detailbyid')
+    app.route('/api/v1/product/detailbyid/')
     .get(async (req: Request,
         res: Response,
         next: NextFunction) =>
@@ -41,7 +64,7 @@ const productRoutes = (app, productController: ProductController = ProductContro
  * @swagger
  * /api/v1/product/detail:
  *   get:
- *     summary: Shows details of product .
+ *     summary: Shows details of product table by business Id .
  *     parameters:
  *       - in: query
  *         name: id
