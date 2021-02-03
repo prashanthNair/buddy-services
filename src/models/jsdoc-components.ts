@@ -234,7 +234,27 @@
  *            type: string
  *            description: Business Id of the customer adding product
  */
-
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Role:
+ *        type: object
+ *        properties:
+ *          roleId:
+ *            type: string
+ *            description: Role ID of the User
+ *          userId:
+ *            type: string
+ *            description: User ID of the User
+ *          roleName:
+ *            type: string
+ *            description: Type of the role assigned
+ *          status:
+ *            type: string
+ *            description: Status of the Role
+ *         
+ */
 
 /**
  * @swagger
