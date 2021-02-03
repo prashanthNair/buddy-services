@@ -238,6 +238,12 @@
  * @swagger
  *  components:
  *    responses:
+ *      Success:
+ *        description: The specified operation is completed successfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/SuccessResponse'
  *      FailureError:
  *        description: The specified operation failed due to internal server error
  *        content:

@@ -31,6 +31,21 @@ const buddyRoutes = (app, buddyController: BuddyController = BuddyController.get
         await buddyController.postBuddy(req, res,next)
     ) 
 
+/**
+ * @swagger
+ * /api/v1/tasks:
+ *   get:
+ *     summary: List the tasks.
+ *     responses:
+ *       201:
+ *         $ref: '#/components/responses/Success'
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       
+ *                 
+*/    
     app.route('/api/v1/tasks')
     .get(async (req: Request,
         res: Response,
