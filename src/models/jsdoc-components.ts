@@ -189,6 +189,51 @@
  *            type: string
  *            description: Margin available to buddy
  */
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Product:
+ *        type: object
+ *        properties:
+ *          name:
+ *            type: string
+ *            description: Name of the Product
+ *          category:
+ *            type: string
+ *            description: Category of the Product
+ *          type:
+ *            type: string
+ *            description: Type of the Product
+ *          brand:
+ *            type: string
+ *            description: Brand of the product 
+ *          currency:
+ *            type: string
+ *            description: Currency Format
+ *          description:
+ *            type: string
+ *            description: Description of the product
+ *          sellingPrice:
+ *            type: string
+ *            description: Selling price of the product
+ *          gst:
+ *            type: string
+ *            description: GST of the product
+ *          mrp:
+ *            type: string
+ *            description: Maximum Retail Price of the product
+ *          createdDate:
+ *            type: string
+ *            description: Date of product registartion
+ *            format: date
+ *          actualPrice:
+ *            type: string
+ *            description: Actual Price of the product
+ *          businessId:
+ *            type: string
+ *            description: Business Id of the customer adding product
+ */
 
 
 /**
