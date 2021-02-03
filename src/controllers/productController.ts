@@ -97,7 +97,7 @@ export class ProductController {
   public async getProducts(req: Request, res: Response, next: NextFunction) {
     
     try {
-      const result = await this.productService.getProducts(req.body.id);
+      const result = await this.productService.getProducts(req.query.id);
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {

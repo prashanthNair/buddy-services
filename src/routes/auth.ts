@@ -138,7 +138,7 @@ const authRoutes = (
  *           type: string
  *     responses:
  *       201:
- *         $ref: '#/components/responses/SuccessResponse'
+ *         $ref: '#/components/responses/Success'
  *       500:
  *         $ref: '#/components/responses/FailureError'
  *       400:
