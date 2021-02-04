@@ -3,6 +3,7 @@ import { AuthController } from "../controllers/authController";
 
 const authRoutes = (
   app,
+  
   authController: AuthController = AuthController.getInstance()
 ) => {
   app
