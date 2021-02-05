@@ -4,6 +4,11 @@ import { AuthService } from "../services/authService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
 import { Update, User } from "../models/user";
 
+class SuccessResponse {
+  status:Number;
+  success:Boolean;
+}
+
 export class AuthController {
   private constructor() {}
 
@@ -65,15 +70,9 @@ export class AuthController {
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
-
-  /**
-   * Register Buddy User
-   * TODO the functionality
-   * @param  {object}   req
-   * @param  {object}   res
-   * @param  {function} next
-   */
+  
   public async postUser(req: Request, res: Response, next: NextFunction) {
+<<<<<<< HEAD
     try {
       // validate the user credential
       if (
@@ -86,6 +85,8 @@ export class AuthController {
           req
         );
       }
+=======
+>>>>>>> dev.0.0.1
 
       let userData: User = {
         UserName: req.body.userName,
@@ -108,9 +109,13 @@ export class AuthController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
+<<<<<<< HEAD
     } catch (error) {
       HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
     }
+=======
+
+>>>>>>> dev.0.0.1
   }
 
   /**
@@ -122,7 +127,7 @@ export class AuthController {
    */
   public async getdetails(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.authService.getUsers(1); // :TODO remove hardcode
+      const result = await this.authService.getUsers(0); // :TODO remove hardcode
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {

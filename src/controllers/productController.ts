@@ -36,7 +36,7 @@ export class ProductController {
    * @param  {function} next
    */
   public async postProduct(req: Request, res: Response, next: NextFunction) {
-    
+    try{
       let productData: Product = {
           Name: req.body.productName,
           Category: req.body.category,
@@ -49,6 +49,7 @@ export class ProductController {
           MRP: req.body.mrp,
           Created_date: req.body.createdDate,
           ActualPrice: req.body.actualPrice,
+          BusinessId:req.body.businessId
         
       };
       const result = await this.productService.postProduct(productData);
@@ -58,6 +59,9 @@ export class ProductController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
+    }catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
   }
 
 /**
@@ -70,9 +74,8 @@ export class ProductController {
   public async getProduct(req: Request, res: Response, next: NextFunction) {
     
     try {
-      // console.log(JSON.stringify(req.body));
       
-      const result = await this.productService.getProduct(req.body.id);
+      const result = await this.productService.getProduct(req.query.id);
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {
@@ -82,5 +85,29 @@ export class ProductController {
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
+
+  /**
+   * db connect test api
+   * my sql db instance created in aws lightsail
+   * @param  {object}   req
+   * @param  {object}   res
+   * @param  {function} next
+   */
+  //To get products details by business id
+  public async getProducts(req: Request, res: Response, next: NextFunction) {
+    
+    try {
+      const result = await this.productService.getProducts(req.query.id);
+      if (result) {
+        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+      } else {
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+      }
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
+  }
+
+  
 
 }

@@ -1,5 +1,6 @@
 node_modules
 dist
+apidoc
 
 # sphinx folders
 _build
