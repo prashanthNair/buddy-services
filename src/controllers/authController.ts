@@ -5,12 +5,12 @@ import { HttpResponseMessage } from "../utils/httpResponseMessage";
 import { Update, User } from "../models/user";
 
 class SuccessResponse {
-  status:Number;
-  success:Boolean;
+  status: Number;
+  success: Boolean;
 }
 
 export class AuthController {
-  private constructor() {}
+  private constructor() { }
 
   private static instance: AuthController = null;
   private authService = null;
@@ -70,30 +70,30 @@ export class AuthController {
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
-  
+
   public async postUser(req: Request, res: Response, next: NextFunction) {
 
-      let userData: User = {
-        UserName: req.body.userName,
-        FirstName: req.body.firstName,
-        LastName: req.body.lastName,
-        Password: req.body.password,
-        Location: req.body.location,
-        IsActive: true,
-        State: req.body.state,
-        Country: req.body.country,
-        Email: req.body.email,
-        MobileNum: req.body.mobileNum,
-        Created_date: null,
-        
-      };
-      const result = await this.authService.postUser(userData);
+    let userData: User = {
+      UserName: req.body.userName,
+      FirstName: req.body.firstName,
+      LastName: req.body.lastName,
+      Password: req.body.password,
+      Location: req.body.location,
+      IsActive: true,
+      State: req.body.state,
+      Country: req.body.country,
+      Email: req.body.email,
+      MobileNum: req.body.mobileNum,
+      Created_date: null,
 
-      if (result) {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
-      } else {
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
-      }
+    };
+    const result = await this.authService.postUser(userData);
+
+    if (result) {
+      HttpResponseMessage.successResponse(res, "Sucessfull");
+    } else {
+      HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+    }
 
   }
 
@@ -106,7 +106,7 @@ export class AuthController {
    */
   public async getdetails(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.authService.getUsers(0); // :TODO remove hardcode
+      const result = await this.authService.getUsers(req.query.id); // :TODO remove hardcode
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {
