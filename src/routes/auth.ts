@@ -65,7 +65,51 @@ const authRoutes = (
       async (req: Request, res: Response, next: NextFunction) =>
         await userReferenceController.postUserReference(req, res, next)
     );
-
+  /**
+   * @swagger
+   * /api/v1/auth/initialRegister/{mobileNum}:
+   *   get:
+   *     summary: API to check if the user exist.
+   *     parameters:
+   *       - in: path
+   *         name: mobileNum
+   *         required: true
+   *         description: Mobile Number of the user account
+   *         schema:
+   *           type: integer
+   *           
+   *     responses:
+   *       201:
+   *         description:  User is valid
+   *         content:
+   *           application/json:
+   *             schema:
+   *               allOf:
+   *                 - $ref: '#/components/schemas/SuccessResponse'
+   *                 - type: object
+   *                   properties:
+   *                     data:
+   *                       type: object
+   *                       properties:
+   *                         mobileNum:
+   *                           type: integer
+   *                           description: Mobile Number of the user
+   *                           example: +911234567890
+   *               
+   *       500:
+   *         $ref: '#/components/responses/FailureError'
+   *       400:
+   *         $ref: '#/components/responses/BadRequest'
+   *       
+   *                 
+  */
+  
+  app
+    .route("/api/v1/auth/initialRegister/:mobileNum")
+    .get(
+      async (req: Request, res: Response, next: NextFunction) =>
+        await authController.getUser(req, res, next)
+    );
 
   /**
    * @swagger

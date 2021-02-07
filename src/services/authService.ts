@@ -1,6 +1,7 @@
 import { Update, User } from "../models/user";
 import { IAuthService } from "./IAuthService";
 import { db } from "../configuration/db.config";
+import { integer } from "aws-sdk/clients/cloudfront";
 
 class AuthService implements IAuthService {
   private constructor() {}
@@ -24,6 +25,16 @@ class AuthService implements IAuthService {
       return rows;
     } catch (error) {
       return null;
+    }
+  }
+  public async getUser(mobileNum: string): Promise<User> {
+    try {
+      let sql = `CALL GetUser(?)`;
+      const [rows, fields] = await db.query(sql, mobileNum);
+      return rows;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
   }
 

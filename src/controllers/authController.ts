@@ -117,6 +117,29 @@ export class AuthController {
     }
   }
 
+  public async getUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      // validate the Mobile Number
+      if (
+        req.params.mobileNum.length == 13  
+      ) {
+        return HttpResponseMessage.validationErrorWithData(
+          res,
+          "Invalid Mobile Number",
+          req
+        );
+      }
+      const result = await this.authService.getUser(req.params.mobileNum);
+      if (result) {
+        HttpResponseMessage.successResponseWithData(res, "User is valid", result);
+      } else {
+        HttpResponseMessage.sendErrorResponse(res, "Invalid User");
+      }
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
+  }
+
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       // validate the user credential
