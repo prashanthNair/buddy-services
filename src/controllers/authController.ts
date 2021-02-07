@@ -80,6 +80,8 @@ export class AuthController {
       Password: req.body.password,
       Location: req.body.location,
       IsActive: true,
+      IsDeleted: false,
+      ProfilePic: req.body.profilePic,
       State: req.body.state,
       Country: req.body.country,
       Email: req.body.email,

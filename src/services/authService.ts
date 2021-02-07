@@ -47,13 +47,15 @@ class AuthService implements IAuthService {
         Password: userData.Password,
         Location: userData.Location,
         IsActive: userData.IsActive,
+        IsDeleted: userData.IsDeleted,
+        ProfilePic: userData.ProfilePic,
         State: userData.State,
         Country: userData.Country,
         Email: userData.Email,
         MobileNum: userData.MobileNum,
       };
   
-      let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?)`;
+      let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?,?,?)`;
       let result = await db.query(sql, [
         user.UserName,
         user.FirstName,
@@ -61,6 +63,8 @@ class AuthService implements IAuthService {
         user.Password,
         user.Location,
         user.IsActive,
+        user.IsDeleted,
+        user.ProfilePic,
         user.State,
         user.Country,
         user.Email,

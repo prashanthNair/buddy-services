@@ -5,6 +5,8 @@ export class User {
     Password:any;
     Location:String|"";
     IsActive:Boolean|false; 
+    IsDeleted:Boolean|false;
+    ProfilePic:String;
     State:any;
     Country:any;
     Email : String|undefined;
