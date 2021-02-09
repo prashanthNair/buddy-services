@@ -70,7 +70,7 @@ class AuthService implements IAuthService {
         user.Email,
         user.MobileNum,
       ]);
-      console.log(result);
+      console.log(result,);
       return result;
 
     }catch (err) {
