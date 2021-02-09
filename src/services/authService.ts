@@ -1,6 +1,7 @@
 import { Update, User } from "../models/user";
 import { IAuthService } from "./IAuthService";
 import { db } from "../configuration/db.config";
+import { integer } from "aws-sdk/clients/cloudfront";
 
 class AuthService implements IAuthService {
   private constructor() {}
@@ -26,6 +27,16 @@ class AuthService implements IAuthService {
       return null;
     }
   }
+  public async getUser(mobileNum: string): Promise<User> {
+    try {
+      let sql = `CALL GetUser(?)`;
+      const [rows, fields] = await db.query(sql, mobileNum);
+      return rows;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 
   public async postUser(userData: User): Promise<User> {
     try{
@@ -36,13 +47,15 @@ class AuthService implements IAuthService {
         Password: userData.Password,
         Location: userData.Location,
         IsActive: userData.IsActive,
+        IsDeleted: userData.IsDeleted,
+        ProfilePic: userData.ProfilePic,
         State: userData.State,
         Country: userData.Country,
         Email: userData.Email,
         MobileNum: userData.MobileNum,
       };
   
-      let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?)`;
+      let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?,?,?)`;
       let result = await db.query(sql, [
         user.UserName,
         user.FirstName,
@@ -50,12 +63,14 @@ class AuthService implements IAuthService {
         user.Password,
         user.Location,
         user.IsActive,
+        user.IsDeleted,
+        user.ProfilePic,
         user.State,
         user.Country,
         user.Email,
         user.MobileNum,
       ]);
-      console.log(result);
+      console.log(result,);
       return result;
 
     }catch (err) {

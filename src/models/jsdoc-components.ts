@@ -20,6 +20,9 @@
  *          location:
  *            type: string
  *            description: Current location of the user
+ *          profilePic:
+ *            type: string
+ *            description: Current Picture
  *          state:
  *            type: string
  *            description: Residing state of the user

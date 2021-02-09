@@ -38,7 +38,7 @@ export class ProductController {
   public async postProduct(req: Request, res: Response, next: NextFunction) {
     try{
       let productData: Product = {
-          Name: req.body.productName,
+          Name: req.body.name,
           Category: req.body.category,
           Type: req.body.type,
           Brand: req.body.brand,
