@@ -87,7 +87,7 @@ export class AuthController {
       Email: req.body.email,
       MobileNum: req.params.mobileNum,
       Created_date: null,
-
+ 
     };
     const result = await this.authService.postUser(userData,req.params.mobileNum);
 
@@ -96,7 +96,7 @@ export class AuthController {
     } else {
       HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
     }
-
+ 
   }
 
   /**
