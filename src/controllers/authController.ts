@@ -85,11 +85,11 @@ export class AuthController {
       State: req.body.state,
       Country: req.body.country,
       Email: req.body.email,
-      MobileNum: req.body.mobileNum,
+      MobileNum: req.params.mobileNum,
       Created_date: null,
 
     };
-    const result = await this.authService.postUser(userData);
+    const result = await this.authService.postUser(userData,req.params.mobileNum);
 
     if (result) {
       HttpResponseMessage.successResponse(res, "Sucessfull");

@@ -111,11 +111,19 @@ const authRoutes = (
         await authController.getUser(req, res, next)
     );
 
+
   /**
    * @swagger
-   * /api/v1/auth/initialRegister/:mobileNum:
+   * /api/v1/auth/initialRegister/{mobileNum}:
    *   put:
    *     summary: Register a user.
+   *     parameters:
+   *       - in: path
+   *         name: mobileNum
+   *         required: true
+   *         description: Mobile Number of the user account
+   *         schema:
+   *           type: integer
    *     requestBody:
    *       required: true
    *       content:
@@ -134,7 +142,7 @@ const authRoutes = (
    *                 
   */
   app
-    .route("/api/v1/auth/initialRegister/:mobileNum")
+    .route("/api/v1/auth/initialRegister/:mobileNum/")
     .put(
       async (req: Request, res: Response, next: NextFunction) =>
         await authController.postUser(req, res, next)
