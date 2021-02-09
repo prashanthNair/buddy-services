@@ -94,7 +94,6 @@ export class AuthController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
-
   }
 
   /**
