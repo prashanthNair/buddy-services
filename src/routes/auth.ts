@@ -8,11 +8,6 @@ import { UserReferenceController } from "../controllers/userReferenceController"
 
 const authRoutes = (
   app,
-<<<<<<< HEAD
-  
-  authController: AuthController = AuthController.getInstance()
-) => {
-=======
   authController: AuthController = AuthController.getInstance(),
   buddyUserController:BuddyUserController= BuddyUserController.getInstance(),
   userReferenceController:UserReferenceController= UserReferenceController.getInstance()
@@ -35,7 +30,6 @@ const authRoutes = (
  *                 
 */
 
->>>>>>> dev.0.0.1
   app
     .route("/")
     .get(

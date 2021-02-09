@@ -72,21 +72,6 @@ export class AuthController {
   }
   
   public async postUser(req: Request, res: Response, next: NextFunction) {
-<<<<<<< HEAD
-    try {
-      // validate the user credential
-      if (
-        req.body &&
-        (req.body.email.length == 0 || req.body.password.length == 0)
-      ) {
-        return HttpResponseMessage.validationErrorWithData(
-          res,
-          "Invalid inputs",
-          req
-        );
-      }
-=======
->>>>>>> dev.0.0.1
 
       let userData: User = {
         UserName: req.body.userName,
@@ -109,13 +94,6 @@ export class AuthController {
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
-<<<<<<< HEAD
-    } catch (error) {
-      HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
-    }
-=======
-
->>>>>>> dev.0.0.1
   }
 
   /**
