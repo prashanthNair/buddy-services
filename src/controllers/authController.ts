@@ -74,6 +74,7 @@ export class AuthController {
   public async postUser(req: Request, res: Response, next: NextFunction) {
 
     let userData: User = {
+      UserId: req.params.userId,
       UserName: req.body.userName,
       FirstName: req.body.firstName,
       LastName: req.body.lastName,

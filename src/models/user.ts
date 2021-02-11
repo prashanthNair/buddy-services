@@ -1,4 +1,5 @@
-export class User { 
+export class User {
+    UserId:String; 
     UserName:any;
     FirstName:any;
     LastName:any;
