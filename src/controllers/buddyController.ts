@@ -36,6 +36,7 @@ export class BuddyController {
   public async postBuddy(req: Request, res: Response, next: NextFunction) {
     try{
         let buddyData: Buddy = {
+        BuddyId: req.params.buddyId,
         HomeTown: req.body.homeTown,
         TeamId: req.body.teamId,
         UserId: req.body.userId,
@@ -49,7 +50,7 @@ export class BuddyController {
         
       };
       console.log
-      const result = await this.buddyService.postBuddy(buddyData);
+      const result = await this.buddyService.postBuddy(buddyData,req.params.buddyId);
   
       if (result) {
         HttpResponseMessage.successResponse(res, "Sucessfull");

@@ -18,6 +18,7 @@ class BuddyService implements IBuddyService {
     try {
       
       let buddy: Buddy = {
+        BuddyId: buddyData.BuddyId,
         HomeTown: buddyData.HomeTown,
         TeamId: buddyData.TeamId,
         UserId: buddyData.UserId,
@@ -30,8 +31,9 @@ class BuddyService implements IBuddyService {
         BuddyRole: buddyData.BuddyRole,
       };
   
-      let sql = `CALL PostBuddy(?,?,?,?,?,?,?,?,?,?)`;
+      let sql = `CALL PostBuddy(?,?,?,?,?,?,?,?,?,?,?)`;
       let result = await db.query(sql, [
+        buddy.BuddyId,
         buddy.HomeTown,
         buddy.TeamId,
         buddy.UserId,
