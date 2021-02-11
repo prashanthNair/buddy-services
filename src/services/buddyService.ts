@@ -52,10 +52,11 @@ class BuddyService implements IBuddyService {
     }
   }
 
-  public async listTask(): Promise<Task> {
-    let sql = `CALL GetBuddyInventoryProducts(?)`;
+  public async listTasks(): Promise<Task> {
+    let sql = `CALL GetBuddyInventoryProducts()`;
       const [rows, fields] = await db.query(sql);
-      return <Task> rows;
+      const [tasks] = rows;
+      return <Task> tasks;
   }
 }
 

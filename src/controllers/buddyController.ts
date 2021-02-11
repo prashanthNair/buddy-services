@@ -72,9 +72,8 @@ export class BuddyController {
    */
   public async listTasks(req: Request, res: Response, next: NextFunction) {
   
-      const result = await this.buddyService.listTasks();
-
       try{
+        const result = await this.buddyService.listTasks();
         HttpResponseMessage.successResponseWithData(res, "Sucessfull",result);
       }
       catch(error){
