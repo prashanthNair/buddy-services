@@ -41,6 +41,7 @@ class AuthService implements IAuthService {
   public async postUser(userData: User): Promise<User> {
     try{
       let user: User = {
+        UserId: userData.UserId,
         UserName: userData.UserName,
         FirstName: userData.FirstName,
         LastName: userData.LastName,
@@ -55,8 +56,9 @@ class AuthService implements IAuthService {
         MobileNum: userData.MobileNum,
       };
   
-      let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?,?,?)`;
+      let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
       let result = await db.query(sql, [
+        user.UserId,
         user.UserName,
         user.FirstName,
         user.LastName,

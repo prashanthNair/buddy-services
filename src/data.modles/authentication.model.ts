@@ -4,6 +4,7 @@ import { db } from "../configuration/db.config";
 class AuthenticationModel {
   public async register(userData: User) {
     let user: User = {
+      UserId : userData.UserId,
       UserName: userData.UserName,
       FirstName: userData.FirstName,
       LastName: userData.LastName,
@@ -18,8 +19,9 @@ class AuthenticationModel {
       MobileNum: userData.MobileNum,
     };
 
-    let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     let result = await db.query(sql, [
+      user.UserId,
       user.UserName,
       user.FirstName,
       user.LastName,

@@ -4,9 +4,16 @@ import { BuddyController } from "../controllers/buddyController";
 const buddyRoutes = (app, buddyController: BuddyController = BuddyController.getInstance()) => {
 /**
  * @swagger
- * /api/v1/buddy/register:
- *   post:
- *     summary: Register a user into buddy table Only .
+ * /api/v1/buddy/register/{buddyId}:
+ *   put:
+ *     summary: Register a Buddy user.
+ *     parameters:
+ *       - in: path
+ *         name: buddyId
+ *         required: true
+ *         description: Buddy Id of the user account
+ *         schema:
+ *           type: integer
  *     requestBody:
  *       required: true
  *       content:
@@ -24,8 +31,8 @@ const buddyRoutes = (app, buddyController: BuddyController = BuddyController.get
  *         $ref: '#/components/responses/FailureError'
  *                 
 */
-    app.route('/api/v1/buddy/register')
-    .post(async (req: Request,
+    app.route('/api/v1/buddy/register/:buddyId/')
+    .put(async (req: Request,
         res: Response,
         next: NextFunction) =>
         await buddyController.postBuddy(req, res,next)

@@ -1,4 +1,7 @@
+import { integer } from "aws-sdk/clients/cloudfront";
+
 export class Buddy { 
+    BuddyId:string;
     HomeTown:any;
     TeamId:any;
     UserId:any;
