@@ -85,16 +85,13 @@ export class AuthController {
       const result = await this.authService.postUser(userData, req.params.mobileNum);
 
       if (result.errno) {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
+        HttpResponseMessage.sendErrorResponse(res,result);
       } else {
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+        HttpResponseMessage.successResponse(res, "Sucessfull");
       }
-    } catch (error) {
-      HttpResponseMessage.sendErrorResponse(res, error);
-
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
     }
-
-
   }
 
   /**

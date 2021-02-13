@@ -45,11 +45,14 @@ export class UserReferenceController {
         userData
       );
       if (result.errno) {
+        console.log("First if loop");
         HttpResponseMessage.sendErrorResponse(res,result);
       } else {
+        console.log("Else part");
         HttpResponseMessage.successResponse(res, "Sucessfull");
       }
     } catch (err) {
+      console.log("Catch");
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
