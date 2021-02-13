@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { IAuthService } from "../services/IAuthService";
 import { AuthService } from "../services/authService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
-import { Update, User } from "../models/user";
+import { InitialUser, Update, User } from "../models/user";
 
 class SuccessResponse {
   status: Number;
@@ -72,32 +72,26 @@ export class AuthController {
   }
 
   public async postUser(req: Request, res: Response, next: NextFunction) {
+    try {
 
-    let userData: User = {
-      UserId: req.params.userId,
-      UserName: req.body.userName,
-      FirstName: req.body.firstName,
-      LastName: req.body.lastName,
-      Password: req.body.password,
-      Location: req.body.location,
-      IsActive: true,
-      IsDeleted: false,
-      ProfilePic: req.body.profilePic,
-      State: req.body.state,
-      Country: req.body.country,
-      Email: req.body.email,
-      MobileNum: req.params.mobileNum,
-      Created_date: null,
- 
-    };
-    const result = await this.authService.postUser(userData,req.params.mobileNum);
+      let userData: InitialUser = {
+        UserId: req.params.userId,
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName,
+        Password: req.body.password,
+        Email: req.body.email,
+        MobileNum: req.params.mobileNum,
+      };
+      const result = await this.authService.postUser(userData, req.params.mobileNum);
 
-    if (result) {
-      HttpResponseMessage.successResponse(res, "Sucessfull");
-    } else {
-      HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+      if (result.errno) {
+        HttpResponseMessage.sendErrorResponse(res,result);
+      } else {
+        HttpResponseMessage.successResponse(res, "Sucessfull");
+      }
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
     }
- 
   }
 
   /**
@@ -124,7 +118,7 @@ export class AuthController {
     try {
       // validate the Mobile Number
       if (
-        req.params.mobileNum.length == 13  
+        req.params.mobileNum.length == 13
       ) {
         return HttpResponseMessage.validationErrorWithData(
           res,

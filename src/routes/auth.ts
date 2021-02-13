@@ -3,9 +3,11 @@ import { format } from "path";
 import { AuthController } from "../controllers/authController";
 import { BuddyUserController } from "../controllers/buddyUserController";
 import { UserReferenceController } from "../controllers/userReferenceController";
+import { User } from "../models/userReference";
 
 
-
+const { body, validationResult, checkSchema, buildCheckFunction, check } = require('express-validator');
+const checkBodyAndQuery = buildCheckFunction(['query']);
 const authRoutes = (
   app,
   authController: AuthController = AuthController.getInstance(),
@@ -61,9 +63,16 @@ const authRoutes = (
   */
   app
     .route("/api/v1/auth/initialRegister")
-    .post(
-      async (req: Request, res: Response, next: NextFunction) =>
+    .post(body('mobileNum').isLength({ min: 10, max: 13 }),
+      async (req: Request, res: Response, next: NextFunction) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          console.log("Invalid length " + JSON.stringify(req.body));
+          return res.status(400).json({ errors: errors.array() });
+        }
         await userReferenceController.postUserReference(req, res, next)
+      }
+
     );
   /**
    * @swagger
@@ -103,7 +112,7 @@ const authRoutes = (
    *       
    *                 
   */
-  
+
   app
     .route("/api/v1/auth/initialRegister/:mobileNum")
     .get(
@@ -135,7 +144,7 @@ const authRoutes = (
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/User'
+   *             $ref: '#/components/schemas/InitialUser'
    *     responses:
    *       201:
    *         description: User registered successfully
@@ -149,9 +158,17 @@ const authRoutes = (
   */
   app
     .route("/api/v1/auth/initialRegister/:mobileNum/:userId/")
-    .put(
-      async (req: Request, res: Response, next: NextFunction) =>
+    .put(check('mobileNum').isLength({ min: 10, max: 13 }), check('userId').isLength({ max: 5 }),
+      body('firstName').isUppercase(), body('lastName').isUppercase(),
+      body('password').isLength({ min: 7 }), body('email').isEmail(),
+      async (req: Request, res: Response, next: NextFunction) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }
         await authController.postUser(req, res, next)
+      }
     );
 
   /**
