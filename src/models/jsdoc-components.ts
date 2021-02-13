@@ -258,7 +258,27 @@
  *            description: Status of the Role
  *         
  */
-
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      InitialUser:
+ *        type: object
+ *        properties:
+ *          firstName:
+ *            type: string
+ *            description: First Name of the User
+ *          lastName:
+ *            type: string
+ *            description: Last Name of the User
+ *          password:
+ *            type: string
+ *            description: Password of the user account
+ *          email:
+ *            type: string
+ *            description: Email of the User
+ *         
+ */
 /**
  * @swagger
  *  components:

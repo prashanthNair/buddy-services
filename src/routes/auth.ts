@@ -5,7 +5,7 @@ import { BuddyUserController } from "../controllers/buddyUserController";
 import { UserReferenceController } from "../controllers/userReferenceController";
 
 
-
+const { body, validationResult } = require('express-validator');
 const authRoutes = (
   app,
   authController: AuthController = AuthController.getInstance(),
@@ -61,9 +61,17 @@ const authRoutes = (
   */
   app
     .route("/api/v1/auth/initialRegister")
-    .post(
-      async (req: Request, res: Response, next: NextFunction) =>
-        await userReferenceController.postUserReference(req, res, next)
+    .post( body('mobileNum').isLength({ min: 10, max: 13 }),
+      async (req: Request, res: Response, next: NextFunction) => {
+        const errors = validationResult(req);
+        if (!errors.isLength) {
+          return res.status(400).json({ errors: errors.array() });
+        }
+        else{
+          await userReferenceController.postUserReference(req, res, next,)
+        }
+      }
+
     );
   /**
    * @swagger
@@ -103,7 +111,7 @@ const authRoutes = (
    *       
    *                 
   */
-  
+
   app
     .route("/api/v1/auth/initialRegister/:mobileNum")
     .get(
@@ -135,7 +143,7 @@ const authRoutes = (
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/User'
+   *             $ref: '#/components/schemas/InitialUser'
    *     responses:
    *       201:
    *         description: User registered successfully
