@@ -22,7 +22,7 @@ export class InitialUser {
     Email : String|undefined;
     MobileNum:any;
 }
-
+//Updated
 export class Update { 
     email : any;
     password:any;
