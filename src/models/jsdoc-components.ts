@@ -169,6 +169,20 @@
  * @swagger
  *  components:
  *    schemas:
+ *      BuddyLink:
+ *        type: object
+ *        properties:
+ *          mobileNum:
+ *            type: string
+ *            description: Mobile Number of the user
+ *          parentId:
+ *            type: string
+ *            description: Parent ID of the user
+ */
+/**
+ * @swagger
+ *  components:
+ *    schemas:
  *      Buddy_Inventory:
  *        type: object
  *        properties:
