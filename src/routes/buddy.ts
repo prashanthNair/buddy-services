@@ -4,35 +4,31 @@ import { BuddyController } from "../controllers/buddyController";
 const buddyRoutes = (app, buddyController: BuddyController = BuddyController.getInstance()) => {
 /**
  * @swagger
- * /api/v1/buddy/register/{buddyId}:
- *   put:
+ * /api/v1/buddy/register/{parentId}/{mobileNum}:
+ *   post:
  *     summary: Register a Buddy user.
  *     parameters:
  *       - in: path
- *         name: buddyId
+ *         name: parentId
  *         required: true
- *         description: Buddy Id of the user account
+ *         description: Id of the user account
  *         schema:
  *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Buddy'
+ *       - in: path
+ *         name: mobileNum
+ *         required: true
+ *         description: New Mobile Number of the user.
+ *         schema:
+ *           type: integer
  *     responses:
- *       201:
- *         description: User registered successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/SuccessResponse'
  *       500:
  *         $ref: '#/components/responses/FailureError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
  *                 
 */
-    app.route('/api/v1/buddy/register/:buddyId/')
-    .put(async (req: Request,
+    app.route('/api/v1/buddy/register/:parentId/:mobileNum')
+    .post(async (req: Request,
         res: Response,
         next: NextFunction) =>
         await buddyController.postBuddy(req, res,next)

@@ -2,65 +2,62 @@ import { Request, Response, NextFunction } from "express";
 import { IBuddyService } from "../services/IBuddyService";
 import { BuddyService } from "../services/buddyService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
-import { Buddy } from "../models/buddy";
+import { Buddy, BuddyLink } from "../models/buddy";
+
+class SuccessResponse {
+  status: Number;
+  success: Boolean;
+}
 
 export class BuddyController {
-    private constructor() {}
-  
-    private static instance: BuddyController = null;
-    private buddyService = null;
-  
-    /**
-     * To get singleton instance
-     *
-     * @param  {object} buddyService
-     */
-  
-    public static getInstance(
-      buddyService: IBuddyService = BuddyService.getInstance()
-    ) {
-      if (!BuddyController.instance) {
-        BuddyController.instance = new BuddyController();
-      }
-      BuddyController.instance.buddyService = buddyService; // mock service Object is passed as a param from .spec
-      return BuddyController.instance;
-    }
+  private constructor() { }
 
-/**
-   * Insert into buddy coloumn
-   * TODO the functionality
-   * @param  {object}   req
-   * @param  {object}   res
-   * @param  {function} next
+  private static instance: BuddyController = null;
+  private buddyService = null;
+
+  /**
+   * To get singleton instance
+   *
+   * @param  {object} buddyService
    */
+
+  public static getInstance(
+    buddyService: IBuddyService = BuddyService.getInstance()
+  ) {
+    if (!BuddyController.instance) {
+      BuddyController.instance = new BuddyController();
+    }
+    BuddyController.instance.buddyService = buddyService; // mock service Object is passed as a param from .spec
+    return BuddyController.instance;
+  }
+
+  /**
+     * Insert into buddy coloumn
+     * TODO the functionality
+     * @param  {object}   req
+     * @param  {object}   res
+     * @param  {function} next
+     */
   public async postBuddy(req: Request, res: Response, next: NextFunction) {
-    try{
-        let buddyData: Buddy = {
-        BuddyId: req.params.buddyId,
-        HomeTown: req.body.homeTown,
-        TeamId: req.body.teamId,
-        UserId: req.body.userId,
-        IsActive: req.body.isActive,
-        State: req.body.state,
-        Country: req.body.country,
-        MobileNum: req.body.mobileNum,
-        ParentId: req.body.parentId,
-        CreatedDate: req.body.createdDate,
-        BuddyRole: req.body.buddyRole,
-        
+    try {
+      let buddyData: BuddyLink = {
+        ParentId: req.params.parentId,
+        MobileNum: req.params.mobileNum,
       };
       console.log
-      const result = await this.buddyService.postBuddy(buddyData,req.params.buddyId);
-  
-      if (result) {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
+      const result = await this.buddyService.postBuddy(buddyData);
+
+      if (result.errno) {
+        console.log("Success");
+        HttpResponseMessage.sendErrorResponse(res,result);
       } else {
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+        console.log("Else part");
+        HttpResponseMessage.successResponse(res, "Sucessfull");
       }
-    }catch (err) {
+    } catch (err) {
+      console.log("Catch");
       HttpResponseMessage.sendErrorResponse(res, err);
     }
-
   }
 
   /**
@@ -71,14 +68,14 @@ export class BuddyController {
    * @param  {function} next
    */
   public async listTasks(req: Request, res: Response, next: NextFunction) {
-  
-      try{
-        const result = await this.buddyService.listTasks();
-        HttpResponseMessage.successResponseWithData(res, "Sucessfull",result);
-      }
-      catch(error){
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed",error);
-      }
+
+    try {
+      const result = await this.buddyService.listTasks();
+      HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+    }
+    catch (error) {
+      HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", error);
+    }
   }
 
 
