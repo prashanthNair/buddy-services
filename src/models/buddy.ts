@@ -15,6 +15,7 @@ export class Buddy {
 export class BuddyLink {  
   MobileNum:any;
   ParentId:any;
+  BuddyRole:string;
 }
 
 export class Task {

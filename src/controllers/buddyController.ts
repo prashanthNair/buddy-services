@@ -43,6 +43,7 @@ export class BuddyController {
       let buddyData: BuddyLink = {
         ParentId: req.params.parentId,
         MobileNum: req.params.mobileNum,
+        BuddyRole: req.params.buddyRole,
       };
       console.log
       const result = await this.buddyService.postBuddy(buddyData);
