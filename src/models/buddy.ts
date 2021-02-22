@@ -1,7 +1,6 @@
 import { integer } from "aws-sdk/clients/cloudfront";
 
 export class Buddy { 
-    BuddyId:string;
     HomeTown:any;
     TeamId:any;
     UserId:any;
@@ -12,6 +11,10 @@ export class Buddy {
     ParentId:any;
     CreatedDate:any;  
     BuddyRole:any;
+}
+export class BuddyLink {  
+  MobileNum:any;
+  ParentId:any;
 }
 
 export class Task {
