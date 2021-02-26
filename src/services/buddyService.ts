@@ -20,12 +20,14 @@ class BuddyService implements IBuddyService {
       let buddy: BuddyLink = {
         ParentId: buddyData.ParentId,
         MobileNum: buddyData.MobileNum,
+        BuddyRole: buddyData.BuddyRole,
       };
   
-      let sql = `CALL PostBuddy(?,?)`;
+      let sql = `CALL PostBuddy(?,?,?)`;
       let result = await db.query(sql, [
         buddy.ParentId,
         buddy.MobileNum,
+        buddy.BuddyRole,
       ]);
       console.log(result);
       return result;
