@@ -158,8 +158,7 @@ const authRoutes = (
   */
   app
     .route("/api/v1/auth/initialRegister/:mobileNum/:userId/")
-    .put(check('mobileNum').isLength({ min: 10, max: 13 }), check('userId').isLength({ max: 5 }),
-      body('firstName').isUppercase(), body('lastName').isUppercase(),
+    .put(check('mobileNum').isLength({ min: 10, max: 13 }), check('userId').isLength({ min:1, max: 5 }),
       body('password').isLength({ min: 7 }), body('email').isEmail(),
       async (req: Request, res: Response, next: NextFunction) => {
 
