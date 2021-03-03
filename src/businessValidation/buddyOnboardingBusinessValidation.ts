@@ -1,14 +1,14 @@
-import { IOnboarding } from "./IonboardingBusinessValidation";
+// import { IOnboarding } from "./IonboardingBusinessValidation";
 
-class OnboardingValidation implements IOnboarding {
-    private constructor() {}
+// class OnboardingValidation implements IOnboarding {
+//     private constructor() {}
   
-    private static instance: IOnboarding = null;
+//     private static instance: IOnboarding = null;
   
-    static getInstance() {
-      if (!OnboardingValidation.instance) {
-        OnboardingValidation.instance = new OnboardingValidation();
-      }
-      return OnboardingValidation.instance;
-    }
-}
+//     static getInstance() {
+//       if (!OnboardingValidation.instance) {
+//         OnboardingValidation.instance = new OnboardingValidation();
+//       }
+//       return OnboardingValidation.instance;
+//     }
+// }
