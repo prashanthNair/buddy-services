@@ -5,12 +5,11 @@ import * as cors from "cors";
 import { swaggerDocument } from "./api-doc";
 import { notFoundErrorHandler, errorHandler } from "./middlewares/apiErrorHandler"; 
 var swaggerUi = require('swagger-ui-express');
- 
+import * as swaggerJSDoc from 'swagger-jsdoc'; 
 import * as AWS from 'aws-sdk' 
 class App {
 
-    public app = express();
- 
+    public app = express(); 
 
     private options: cors.CorsOptions = {
         allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
@@ -19,18 +18,29 @@ class App {
         origin: 'http://localhost:4200',
         preflightContinue: false
     };
-
+    
     constructor() {
         this.config(); 
         registerRoutes(this.app);
         this.app.use(notFoundErrorHandler)
         this.app.use(errorHandler);
+        console.log(__filename);
+        
     }
 
+    private JSDocOptions = {
+        // Swagger api doc meta data definitions
+        swaggerDefinition : swaggerDocument,
+        // Paths to files containing OpenAPI definitions
+        apis: ["./dist/models/jsdoc-components.js","./dist/routes/*.js"]
+      };
+
     private config(): void {
+        this.app.use(cors())
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));  
+        const swaggerSpec = swaggerJSDoc(this.JSDocOptions);
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); 
     }
  
 }

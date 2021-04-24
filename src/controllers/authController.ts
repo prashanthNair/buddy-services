@@ -2,10 +2,15 @@ import { Request, Response, NextFunction } from "express";
 import { IAuthService } from "../services/IAuthService";
 import { AuthService } from "../services/authService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
-import { Update, User } from "../models/user";
+import { InitialUser, Update, User } from "../models/user";
+
+class SuccessResponse {
+  status: Number;
+  success: Boolean;
+}
 
 export class AuthController {
-  private constructor() {}
+  private constructor() { }
 
   private static instance: AuthController = null;
   private authService = null;
@@ -37,8 +42,8 @@ export class AuthController {
     try {
       // validate the user credential
       if (
-        req.body &&
-        (req.body.email.length == 0 || req.body.password.length == 0)
+        req.params &&
+        (req.params.email.length == 0 || req.params.password.length == 0)
       ) {
         return HttpResponseMessage.validationErrorWithData(
           res,
@@ -48,8 +53,8 @@ export class AuthController {
       }
 
       const result = await this.authService.login(
-        req.body.email,
-        req.body.password
+        req.params.email,
+        req.params.password
       );
 
       if (result) {
@@ -66,45 +71,26 @@ export class AuthController {
     }
   }
 
-  /**
-   * Register Buddy User
-   * TODO the functionality
-   * @param  {object}   req
-   * @param  {object}   res
-   * @param  {function} next
-   */
   public async postUser(req: Request, res: Response, next: NextFunction) {
     try {
-      // validate the user credential
-      if (
-        req.body &&
-        (req.body.email.length == 0 || req.body.password.length == 0)
-      ) {
-        return HttpResponseMessage.validationErrorWithData(
-          res,
-          "Invalid inputs",
-          req
-        );
-      }
 
-      let userData: User = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        mobileNum: req.body.mobileNum,
-        location: req.body.location,
-        created_date: null,
-        isActive: true,
+      let userData: InitialUser = {
+        UserId: req.params.userId,
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName,
+        Password: req.body.password,
+        Email: req.body.email,
+        MobileNum: req.params.mobileNum,
       };
-      const result = await this.authService.postUser(userData);
+      const result = await this.authService.postUser(userData, req.params.mobileNum);
 
-      if (result) {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
+      if (result.errno) {
+        HttpResponseMessage.sendErrorResponse(res,result);
       } else {
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+        HttpResponseMessage.successResponse(res, "Sucessfull");
       }
-    } catch (error) {
-      HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
 
@@ -116,18 +102,41 @@ export class AuthController {
    * @param  {function} next
    */
   public async getdetails(req: Request, res: Response, next: NextFunction) {
-    try { 
-      const result = await this.authService.getUsers(1); // :TODO remove hardcode 
+    try {
+      const result = await this.authService.getUsers(req.query.id); // :TODO remove hardcode
       if (result) {
-          HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
       } else {
-          HttpResponseMessage.sendErrorResponse(res, "Transaction Failed")
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
     } catch (err) {
       HttpResponseMessage.sendErrorResponse(res, err);
     }
   }
-   
+
+  public async getUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      // validate the Mobile Number
+      if (
+        req.params.mobileNum.length == 13
+      ) {
+        return HttpResponseMessage.validationErrorWithData(
+          res,
+          "Invalid Mobile Number",
+          req
+        );
+      }
+      const result = await this.authService.getUser(req.params.mobileNum);
+      if (result) {
+        HttpResponseMessage.successResponseWithData(res, "User is valid", result);
+      } else {
+        HttpResponseMessage.sendErrorResponse(res, "Invalid User");
+      }
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
+  }
+
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       // validate the user credential
@@ -145,7 +154,7 @@ export class AuthController {
       let userData: Update = {
         email: req.body.email,
         password: req.body.password,
-        };
+      };
       const result = await this.authService.update(userData);
 
       if (result) {
@@ -157,9 +166,5 @@ export class AuthController {
       HttpResponseMessage.sendErrorResponse(res, "Transaction 'Failed", error);
     }
   }
-
-
-
 }
-
-
+//Updated 

@@ -11,10 +11,9 @@ export class HttpResponseMessage {
      * @param  {object}   res
      */
 
-    public static successResponse(res: Response, message: string) { 
+    public static successResponse(res: any, message: string) { 
         let resData = new HttpResponse();
-        resData = { success: true, status: 1, message, data: [] };
-        Logger.error(resData.message);
+        resData = { success: true, status: 200, message, data: [] }; 
         return res.status(200).json(resData);
     };
 
@@ -29,7 +28,7 @@ export class HttpResponseMessage {
     public static async successResponseWithData(res: Response, message: string, data: object) {
 
         let resData = new HttpResponse();
-        resData = { success: true, status: 1, message, data };  
+        resData = { success: true, status: 200, message, data };  
        return res.status(200).json(resData);
 
     };
@@ -41,20 +40,18 @@ export class HttpResponseMessage {
      * @param  {string}   message
      */
 
-    public static sendErrorResponse(res: Response, message: string,error?:any) {
+    public static sendErrorResponse(res: any, result: any,error?:any) {
 
         let resData = new HttpResponse();
         
         resData = {
-            success: false, status: 0, message, error: {
-                code: 500,
-                message: 'INTERNAL_SERVER_ERROR',
+            success: false, status: 500,message: result.message, error: {
+                code: res.errno,
+                message: result.message,
                 stackTrace:error,
                 params:error
             }, data: []
-        };
-        Logger.error(resData.message);
-        console.log(resData); 
+        };  
        return res.status(500).json(resData);
     };
 
