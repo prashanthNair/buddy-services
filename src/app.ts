@@ -5,8 +5,7 @@ import * as cors from "cors";
 import { swaggerDocument } from "./api-doc";
 import { notFoundErrorHandler, errorHandler } from "./middlewares/apiErrorHandler"; 
 var swaggerUi = require('swagger-ui-express');
-import * as swaggerJSDoc from 'swagger-jsdoc'; 
-import * as AWS from 'aws-sdk' 
+import * as swaggerJSDoc from 'swagger-jsdoc';  
 class App {
 
     public app = express(); 

@@ -14,13 +14,16 @@ export class User {
     MobileNum:any;
     Created_date?:Date|undefined  
 }
-export class InitialUser { 
-    UserId:String; 
+export class InitialUser {  
     FirstName:any;
     LastName:any;
     Password:any;
     Email : String|undefined;
     MobileNum:any;
+    Gender?:any|null;
+    DOB?:any|null;
+    BuddyRole?:any|null;
+    ParentId?:any|null;;
 }
 //Updated
 export class Update { 

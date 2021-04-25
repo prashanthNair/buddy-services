@@ -123,7 +123,7 @@ const authRoutes = (
 
   /**
    * @swagger
-   * /api/v1/auth/initialRegister/{mobileNum}/{userId}:
+   * /api/v1/auth/initialRegister/{mobileNum}:
    *   put:
    *     summary: Register a user.
    *     parameters:
@@ -132,13 +132,7 @@ const authRoutes = (
    *         required: true
    *         description: Mobile Number of the user account
    *         schema:
-   *           type: integer
-   *       - in: path
-   *         name: userId
-   *         required: true
-   *         description: User ID of the user account
-   *         schema:
-   *           type: integer
+   *           type: integer       
    *     requestBody:
    *       required: true
    *       content:
@@ -157,8 +151,8 @@ const authRoutes = (
    *                 
   */
   app
-    .route("/api/v1/auth/initialRegister/:mobileNum/:userId/")
-    .put(check('mobileNum').isLength({ min: 10, max: 13 }), check('userId').isLength({ min:1, max: 5 }),
+    .route("/api/v1/auth/initialRegister/:mobileNum/")
+    .put(check('mobileNum').isLength({ min: 10, max: 13 }),
       body('password').isLength({ min: 7 }), body('email').isEmail(),
       async (req: Request, res: Response, next: NextFunction) => {
 

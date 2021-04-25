@@ -3,6 +3,7 @@ import { IAuthService } from "../services/IAuthService";
 import { AuthService } from "../services/authService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
 import { InitialUser, Update, User } from "../models/user";
+import { body } from "express-validator";
 
 class SuccessResponse {
   status: Number;
@@ -75,12 +76,15 @@ export class AuthController {
     try {
 
       let userData: InitialUser = {
-        UserId: req.params.userId,
-        FirstName: req.body.firstName,
-        LastName: req.body.lastName,
-        Password: req.body.password,
-        Email: req.body.email,
+        FirstName: req.body.FirstName,
+        LastName: req.body.LastName,
+        Password: req.body.Password,
+        Email: req.body.Email,
         MobileNum: req.params.mobileNum,
+        Gender:req.body.Gender,
+        DOB:req.body.DOB,
+        BuddyRole:req.body.BuddyRole,
+        ParentId:req.body.ParentId
       };
       const result = await this.authService.postUser(userData, req.params.mobileNum);
 
@@ -152,8 +156,8 @@ export class AuthController {
       }
 
       let userData: Update = {
-        email: req.body.email,
-        password: req.body.password,
+        email: req.body.Email,
+        password: req.body.Password,
       };
       const result = await this.authService.update(userData);
 
