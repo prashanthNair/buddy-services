@@ -19,7 +19,7 @@ export class InitialUser {
     LastName:any;
     Password:any;
     Email : String|undefined;
-    MobileNum:any;
+    MobileNum:number;
     Gender?:any|null;
     DOB?:any|null;
     BuddyRole?:any|null;

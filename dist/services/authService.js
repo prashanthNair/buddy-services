@@ -51,21 +51,27 @@ class AuthService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let user = {
-                    UserId: userData.UserId,
                     FirstName: userData.FirstName,
                     LastName: userData.LastName,
                     Password: userData.Password,
                     Email: userData.Email,
                     MobileNum: userData.MobileNum,
+                    Gender: userData.Gender,
+                    DOB: userData.DOB,
+                    BuddyRole: userData.BuddyRole,
+                    ParentId: userData.ParentId
                 };
-                let sql = `CALL PostUser(?,?,?,?,?,?)`;
+                let sql = `CALL PostUser(?,?,?,?,?,?,?,?,?)`;
                 let result = yield db_config_1.db.query(sql, [
-                    user.UserId,
                     user.FirstName,
                     user.LastName,
                     user.Password,
                     user.Email,
                     user.MobileNum,
+                    user.Gender,
+                    user.DOB,
+                    user.BuddyRole,
+                    user.ParentId
                 ]);
                 console.log(result);
                 return result;

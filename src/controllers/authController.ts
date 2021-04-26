@@ -76,11 +76,11 @@ export class AuthController {
     try {
 
       let userData: InitialUser = {
-        FirstName: req.body.FirstName,
-        LastName: req.body.LastName,
-        Password: req.body.Password,
-        Email: req.body.Email,
-        MobileNum: req.params.mobileNum,
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName,
+        Password: req.body.password,
+        Email: req.body.email,
+        MobileNum:Number.parseInt(req.params.mobileNum),
         Gender:req.body.Gender,
         DOB:req.body.DOB,
         BuddyRole:req.body.BuddyRole,
@@ -130,7 +130,7 @@ export class AuthController {
           req
         );
       }
-      const result = await this.authService.getUser(req.params.mobileNum);
+      const result = await this.authService.getUser(Number.parseInt(req.params.mobileNum));
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "User is valid", result);
       } else {

@@ -62,12 +62,15 @@ class AuthController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let userData = {
-                    UserId: req.params.userId,
                     FirstName: req.body.firstName,
                     LastName: req.body.lastName,
                     Password: req.body.password,
                     Email: req.body.email,
-                    MobileNum: req.params.mobileNum,
+                    MobileNum: Number.parseInt(req.params.mobileNum),
+                    Gender: req.body.Gender,
+                    DOB: req.body.DOB,
+                    BuddyRole: req.body.BuddyRole,
+                    ParentId: req.body.ParentId
                 };
                 const result = yield this.authService.postUser(userData, req.params.mobileNum);
                 if (result.errno) {
@@ -112,7 +115,7 @@ class AuthController {
                 if (req.params.mobileNum.length == 13) {
                     return httpResponseMessage_1.HttpResponseMessage.validationErrorWithData(res, "Invalid Mobile Number", req);
                 }
-                const result = yield this.authService.getUser(req.params.mobileNum);
+                const result = yield this.authService.getUser(Number.parseInt(req.params.mobileNum));
                 if (result) {
                     httpResponseMessage_1.HttpResponseMessage.successResponseWithData(res, "User is valid", result);
                 }
@@ -134,8 +137,8 @@ class AuthController {
                     return httpResponseMessage_1.HttpResponseMessage.validationErrorWithData(res, "Invalid inputs", req);
                 }
                 let userData = {
-                    email: req.body.email,
-                    password: req.body.password,
+                    email: req.body.Email,
+                    password: req.body.Password,
                 };
                 const result = yield this.authService.update(userData);
                 if (result) {

@@ -5,6 +5,7 @@ class User {
 }
 exports.User = User;
 class InitialUser {
+    ;
 }
 exports.InitialUser = InitialUser;
 //Updated

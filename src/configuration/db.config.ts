@@ -11,14 +11,14 @@ const lightSailInstance={
 const ec2Instance={
     host: 'migobucksbuddydb.chxvcdv9iena.ap-south-1.rds.amazonaws.com',
     user: 'mibmasteruser',
-    password: 'MigoBucksDevDb$1',
+    password: 'MigobucksBuddy#1',
     database: 'MIBBuddyDB',
     connectionLimit: 10,
     multipleStatements: true
 }
 
 
-const connection= createPool(ec2Instance)
+const connection= createPool(lightSailInstance)
 const db = connection.promise();
 export { db }
  

@@ -109,7 +109,7 @@ const authRoutes = (app, authController = authController_1.AuthController.getIns
         .get((req, res, next) => __awaiter(void 0, void 0, void 0, function* () { return yield authController.getUser(req, res, next); }));
     /**
      * @swagger
-     * /api/v1/auth/initialRegister/{mobileNum}/{userId}:
+     * /api/v1/auth/initialRegister/{mobileNum}:
      *   put:
      *     summary: Register a user.
      *     parameters:
@@ -117,12 +117,6 @@ const authRoutes = (app, authController = authController_1.AuthController.getIns
      *         name: mobileNum
      *         required: true
      *         description: Mobile Number of the user account
-     *         schema:
-     *           type: integer
-     *       - in: path
-     *         name: userId
-     *         required: true
-     *         description: User ID of the user account
      *         schema:
      *           type: integer
      *     requestBody:
@@ -143,8 +137,8 @@ const authRoutes = (app, authController = authController_1.AuthController.getIns
      *
     */
     app
-        .route("/api/v1/auth/initialRegister/:mobileNum/:userId/")
-        .put(check('mobileNum').isLength({ min: 10, max: 13 }), check('userId').isLength({ min: 1, max: 5 }), body('password').isLength({ min: 7 }), body('email').isEmail(), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+        .route("/api/v1/auth/initialRegister/:mobileNum/")
+        .put(check('mobileNum').isLength({ min: 10, max: 13 }), body('password').isLength({ min: 7 }), body('email').isEmail(), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
