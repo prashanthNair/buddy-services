@@ -1,0 +1,12 @@
+demo_job_1: 
+     tags: 
+       - ci
+     script: 
+       - echo Hello World
+       - pwd
+       - whoami
+       - sudo npm stop
+       - sudo npm install
+       - sudo npm run build
+       - sudo npm run start
+       
