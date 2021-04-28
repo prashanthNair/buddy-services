@@ -8,3 +8,4 @@ demo_job_1:
        - sudo npm install
        - sudo npm run build
        - sudo npm run start
+       - sudo exit
