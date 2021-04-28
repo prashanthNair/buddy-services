@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "ts-node ./src/server.ts",
     "start": "nodemon ./dist/server.js",
+    "stop": "nodemon ./dist/server.js" ,
     "build": "tsc"
   },
   "keywords": [
