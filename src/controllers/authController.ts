@@ -72,53 +72,8 @@ export class AuthController {
     }
   }
 
-  public async postUser(req: Request, res: Response, next: NextFunction) {
-    try {
 
-      let userData: InitialUser = {
-        FirstName: req.body.firstName,
-        LastName: req.body.lastName,
-        Password: req.body.password,
-        Email: req.body.email,
-        MobileNum:Number.parseInt(req.params.mobileNum),
-        Gender:req.body.Gender,
-        DOB:req.body.DOB,
-        BuddyRole:req.body.BuddyRole,
-        ParentId:req.body.ParentId
-      };
-      const result = await this.authService.postUser(userData, req.params.mobileNum);
-
-      if (result.errno) {
-        HttpResponseMessage.sendErrorResponse(res,result);
-      } else {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
-      }
-    } catch (err) {
-      HttpResponseMessage.sendErrorResponse(res, err);
-    }
-  }
-
-  /**
-   * db connect test api
-   * my sql db instance created in aws lightsail
-   * @param  {object}   req
-   * @param  {object}   res
-   * @param  {function} next
-   */
-  public async getdetails(req: Request, res: Response, next: NextFunction) {
-    try {
-      const result = await this.authService.getUsers(req.query.id); // :TODO remove hardcode
-      if (result) {
-        HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
-      } else {
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
-      }
-    } catch (err) {
-      HttpResponseMessage.sendErrorResponse(res, err);
-    }
-  }
-
-  public async getUser(req: Request, res: Response, next: NextFunction) {
+  public async getUserDetails(req: Request, res: Response, next: NextFunction) {
     try {
       // validate the Mobile Number
       if (
@@ -130,11 +85,39 @@ export class AuthController {
           req
         );
       }
-      const result = await this.authService.getUser(Number.parseInt(req.params.mobileNum));
+      const result = await this.authService.getUserDetails(Number.parseInt(req.params.mobileNum));
       if (result) {
         HttpResponseMessage.successResponseWithData(res, "User is valid", result);
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Invalid User");
+      }
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, err);
+    }
+  }
+
+
+  public async postUser(req: Request, res: Response, next: NextFunction) {
+    try {
+
+      let userData: InitialUser = {
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName,
+        Password: req.body.password,
+        Email: req.body.email,
+        MobileNum: Number.parseInt(req.params.mobileNum),
+        Gender: req.body.gender,
+        DOB: req.body.dob,
+        BuddyRole: req.body.buddyRole,
+        ParentId: req.body.parentId
+      };
+
+      const result = await this.authService.postUser(userData, req.params.mobileNum);
+
+      if (result.errno) {
+        HttpResponseMessage.sendErrorResponse(res, result);
+      } else {
+        HttpResponseMessage.successResponse(res, "Sucessfull");
       }
     } catch (err) {
       HttpResponseMessage.sendErrorResponse(res, err);
@@ -171,4 +154,4 @@ export class AuthController {
     }
   }
 }
-//Updated 
+//Updated

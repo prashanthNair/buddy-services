@@ -19,6 +19,7 @@ class AuthService implements IAuthService {
 
   public async getUsers(userId: number, password: string): Promise<User> {
     try {
+      
       let sql = `CALL GetUsers(?)`;
       const [rows, fields] = await db.query(sql, userId);
       return rows;
@@ -26,7 +27,7 @@ class AuthService implements IAuthService {
       return null;
     }
   }
-  public async getUser(mobileNum: number): Promise<User> {
+  public async getUserDetails(mobileNum: number): Promise<User> {
     try {
       let sql = `CALL GetUser(?)`;
       const [rows, fields] = await db.query(sql, mobileNum);

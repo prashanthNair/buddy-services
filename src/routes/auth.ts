@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { format } from "path";
 import { AuthController } from "../controllers/authController";
 import { BuddyUserController } from "../controllers/buddyUserController";
+import { EarningController } from "../controllers/earningController";
 import { UserReferenceController } from "../controllers/userReferenceController";
 import { User } from "../models/userReference";
 
@@ -12,7 +13,8 @@ const authRoutes = (
   app,
   authController: AuthController = AuthController.getInstance(),
   buddyUserController: BuddyUserController = BuddyUserController.getInstance(),
-  userReferenceController: UserReferenceController = UserReferenceController.getInstance()
+  userReferenceController: UserReferenceController = UserReferenceController.getInstance(),
+  earningController: EarningController = EarningController.getInstance()
 ) => {
 
   /**
@@ -34,10 +36,12 @@ const authRoutes = (
 
   app
     .route("/")
-    .get(
-      (req: Request, res: Response, next: NextFunction) =>
-        res.send("Welcome to Migobucks")
+    .get(async (req: Request, res: Response, next: NextFunction) =>
+      await earningController.listAllEarnings(req, res, next)
+      // res.send("Welcome")
     );
+
+
 
   /**
    * @swagger
@@ -76,7 +80,7 @@ const authRoutes = (
     );
   /**
    * @swagger
-   * /api/v1/auth/initialRegister/{mobileNum}:
+   * /api/v1/auth/getUserDetails/{mobileNum}:
    *   get:
    *     summary: API to check if the user exist.
    *     parameters:
@@ -117,7 +121,7 @@ const authRoutes = (
     .route("/api/v1/auth/initialRegister/:mobileNum")
     .get(
       async (req: Request, res: Response, next: NextFunction) =>
-        await authController.getUser(req, res, next)
+        await authController.getUserDetails(req, res, next)
     );
 
 
@@ -153,7 +157,6 @@ const authRoutes = (
   app
     .route("/api/v1/auth/initialRegister/:mobileNum/")
     .put(check('mobileNum').isLength({ min: 10, max: 13 }),
-      body('password').isLength({ min: 7 }), body('email').isEmail(),
       async (req: Request, res: Response, next: NextFunction) => {
 
         const errors = validationResult(req);
@@ -192,88 +195,7 @@ const authRoutes = (
       async (req: Request, res: Response, next: NextFunction) =>
         await buddyUserController.postBuddyUser(req, res, next)
     );
-  /**
-   * @swagger
-   * /api/v1/auth/user:
-   *   get:
-   *     summary: Show user details.
-   *     parameters:
-   *       - in: query
-   *         name: id
-   *         required: true
-   *         description: ID of the User account
-   *         schema:
-   *           type: string
-   *     responses:
-   *       201:
-   *         $ref: '#/components/responses/Success'
-   *       500:
-   *         $ref: '#/components/responses/FailureError'
-   *       400:
-   *         $ref: '#/components/responses/BadRequest'
-   *       
-   *                 
-  */
 
-  app
-    .route("/api/v1/auth/user/")
-    .get(
-      async (req: Request, res: Response, next: NextFunction) =>
-        await authController.getdetails(req, res, next)
-    );
-
-  /**
-   * @swagger
-   * /api/v1/auth/user/{email}/{password}:
-   *   get:
-   *     summary: Show buddy user details.
-   *     parameters:
-   *       - in: path
-   *         name: email
-   *         required: true
-   *         description: Email ID of the buddy user account
-   *         schema:
-   *           type: string
-   *       - in: path
-   *         name: password
-   *         required: true
-   *         description: Password of the buddy user account
-   *         schema:
-   *           type: string
-   *           
-   *     responses:
-   *       201:
-   *         description: Buddy user details successfully retrieved
-   *         content:
-   *           application/json:
-   *             schema:
-   *               allOf:
-   *                 - $ref: '#/components/schemas/SuccessResponse'
-   *                 - type: object
-   *                   properties:
-   *                     data:
-   *                       type: object
-   *                       properties:
-   *                         email:
-   *                           type: string
-   *                           description: Email of the Valid user
-   *                           example: buddy@migobucks.com
-   *               
-   *       500:
-   *         $ref: '#/components/responses/FailureError'
-   *       400:
-   *         $ref: '#/components/responses/BadRequest'
-   *       
-   *                 
-  */
-
-
-  app
-    .route("/api/v1/auth/user/:email/:password")
-    .get(
-      async (req: Request, res: Response, next: NextFunction) =>
-        await authController.getdetails(req, res, next)
-    );
 
   /**
    * @swagger

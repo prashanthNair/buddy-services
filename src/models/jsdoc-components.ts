@@ -46,7 +46,7 @@
  *        type: object
  *        properties:
  *          mobileNum:
- *            type: string
+ *            type: number
  *            description: Mobile Number for the user.
  */
 
@@ -291,6 +291,19 @@
  *          email:
  *            type: string
  *            description: Email of the User
+ *          gender:
+ *            type: string
+ *            description: Gender 
+ *          dob:
+ *            type: string
+ *            format: date-time
+ *            description: date of birth 
+ *          parentId:
+ *            type: number
+ *            description: Id of the parent user
+ *          buddyRole:
+ *            type: string
+ *            description: Role of the buddy
  *         
  */
 /**

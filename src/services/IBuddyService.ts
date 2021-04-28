@@ -1,6 +1,5 @@
-import { Buddy } from "../models/buddy";
+import {  Task } from "../models/buddy";
 
-export interface IBuddyService {
-    postBuddy(buddyData: Buddy); 
-    listTasks(): Promise<Object>; 
+export interface IBuddyService { 
+    listTasks(): Promise<Task>; 
 }
