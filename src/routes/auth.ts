@@ -36,9 +36,8 @@ const authRoutes = (
 
   app
     .route("/")
-    .get(async (req: Request, res: Response, next: NextFunction) =>
-      await earningController.listAllEarnings(req, res, next)
-      // res.send("Welcome")
+    .get(async (req: Request, res: Response, next: NextFunction) => 
+     res.send("Welcome")
     );
 
 
